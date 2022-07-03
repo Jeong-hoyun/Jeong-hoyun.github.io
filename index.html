@@ -166,83 +166,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/01/hello-world/" class="post-title-link" itemprop="url">first blog posting</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-01 19:11:11 / Modified: 19:15:57" itemprop="dateCreated datePublished" datetime="2022-07-01T19:11:11+09:00">2022-07-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="첫-블로그-포스팅"><a href="#첫-블로그-포스팅" class="headerlink" title="첫 블로그 포스팅"></a>첫 블로그 포스팅</h2><h3 id="6월부터-차근차근"><a href="#6월부터-차근차근" class="headerlink" title="6월부터 차근차근"></a>6월부터 차근차근</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>hexo와 깃허브를 통해 쉽게 나의 블로그를 개설하게 되었다. </p>
-<ol>
-<li>조금 정리가 안된 부분을 한번씩 포스팅 </li>
-<li>과거 일본에서 배운거도 정리(마케팅,SEO,여행)</li>
-<li>취업할때까지 화이팅~</li>
-</ol>
-<p>제 깃허브 주소는 <a target="_blank" rel="noopener" href="https://github.com/Jeong-hoyun/">이곳</a>입니다!<br>공부한거도 하나씩 commit 하면서 정리하고 프로젝트 작업도 병행할 예정입니다</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/06/30/javascript-class-testig/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -416,6 +339,89 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, getFullName
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// ES5</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> pow = arr.<span class="title function_">map</span>(<span class="keyword">function</span> (<span class="params">x</span>) &#123; <span class="comment">// x는 요소값</span></span><br><span class="line">  <span class="keyword">return</span> x * x;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(pow);   <span class="comment">// 1X1 ,2X2, 3X3 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> pow = arr.<span class="title function_">map</span>(<span class="function"><span class="params">x</span> =&gt;</span> x * x);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(pow); <span class="comment">// [ 1, 4, 9 ]</span></span><br></pre></td></tr></table></figure>
 
 <p>&#96;&#96;&#96;</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/06/29/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/29/hello-world/" class="post-title-link" itemprop="url">first blog posting</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-29 19:11:11" itemprop="dateCreated datePublished" datetime="2022-06-29T19:11:11+09:00">2022-06-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-03 19:05:00" itemprop="dateModified" datetime="2022-07-03T19:05:00+09:00">2022-07-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="첫-블로그-포스팅"><a href="#첫-블로그-포스팅" class="headerlink" title="첫 블로그 포스팅"></a>첫 블로그 포스팅</h2><h3 id="6월부터-차근차근"><a href="#6월부터-차근차근" class="headerlink" title="6월부터 차근차근"></a>6월부터 차근차근</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>hexo와 깃허브를 통해 쉽게 나의 블로그를 개설하게 되었다. </p>
+<ol>
+<li>조금 정리가 안된 부분을 한번씩 포스팅 </li>
+<li>과거 일본에서 배운거도 정리(마케팅,SEO,여행)</li>
+<li>취업할때까지 화이팅~</li>
+</ol>
+<p>제 깃허브 주소는 <a target="_blank" rel="noopener" href="https://github.com/Jeong-hoyun/">이곳</a>입니다!<br>공부한거도 하나씩 commit 하면서 정리하고 프로젝트 작업도 병행할 예정입니다</p>
 
       
     </div>
