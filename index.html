@@ -121,16 +121,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -161,6 +161,170 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/04/scss-mixins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/04/scss-mixins/" class="post-title-link" itemprop="url">scss mixins</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-04 14:21:00 / Modified: 14:47:55" itemprop="dateCreated datePublished" datetime="2022-07-04T14:21:00+09:00">2022-07-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/html/" itemprop="url" rel="index"><span itemprop="name">html</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="SCSS-MIXINS-재활용"><a href="#SCSS-MIXINS-재활용" class="headerlink" title="SCSS MIXINS 재활용"></a>SCSS MIXINS 재활용</h2><p>css를 변수화 혹은 반복할수 있는 점이 scss의 최고의 장점이라고 생각합니다<br>혹은 함수화를 통해서 무궁무진하게 재활용하여 편리하게 웹사이트를 구축하는데 도움이 되기에 정리를 해보고 있습니다</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> center </span><br><span class="line">&#123;</span><br><span class="line">   <span class="attribute">display</span>: flex;</span><br><span class="line">   <span class="attribute">justify-content</span>: center;</span><br><span class="line">   <span class="attribute">align-items</span>:center;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 자주 쓰는 css 형식을 변수화</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@mixin</span> box(<span class="variable">$size</span>:<span class="number">100px</span>)&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">$size</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$size</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: tomato;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 자주 쓰는 css 형식을 함수화(변수 2개도 사용가능)</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="keyword">@include</span> center;</span><br><span class="line">    <span class="selector-class">.item</span>&#123;</span><br><span class="line">        <span class="keyword">@include</span> box(<span class="number">100px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위의 코드를 풀면 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  align-items: center;</span><br><span class="line">&#125;</span><br><span class="line">.container .item &#123;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  background-color: tomato;</span><br><span class="line">&#125;</span><br><span class="line">//사이즈가 지정되지 않았기때문에 기본사이즈인 100px가 들어가게 된다.</span><br></pre></td></tr></table></figure>
+
+<p>코드수가 많아질수록 위와 같은 변수화와 함수화는 코드 압축에 큰 도움이 된다고 할수 있습니다.<br>사이트 프로젝트 만들때 자주 쓸 예정입니다</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/04/javascript-class-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/04/javascript-class-2/" class="post-title-link" itemprop="url">javascript class(2)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-04 14:17:00 / Modified: 14:20:20" itemprop="dateCreated datePublished" datetime="2022-07-04T14:17:00+09:00">2022-07-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="클래스가-하는일"><a href="#클래스가-하는일" class="headerlink" title="클래스가 하는일"></a>클래스가 하는일</h2><p>class User {…} 문법 구조가 진짜 하는 일은 다음과 같습니다.</p>
+<p>User라는 이름을 가진 함수를 만듭니다. 함수 본문은 생성자 메서드 constructor에서 가져옵니다. 생성자 메서드가 없으면 본문이 비워진 채로 함수가 만들어집니다.<br>getFullName 같은 클래스 내에서 정의한 메서드를 User.prototype에 저장합니다.<br>new User를 호출해 객체를 만들고, 객체의 메서드를 호출하면 함수의 prototype 프로퍼티에서 설명한 것처럼 메서드를 prototype 프로퍼티를 통해 가져옵니다. 이 과정이 있기 때문에 객체에서 클래스 메서드에 접근할 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name</span>) &#123; <span class="variable language_">this</span>.<span class="property">name</span> = name; &#125;</span><br><span class="line">    <span class="title function_">getFullName</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스는 함수입니다.</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="keyword">typeof</span> <span class="title class_">User</span>); <span class="comment">// function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 정확히는 생성자 메서드와 동일합니다.</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="title class_">User</span> === <span class="title class_">User</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스 내부에서 정의한 메서드는 User.prototype에 저장됩니다.</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="title class_">User</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHi</span>); <span class="comment">// alert(this.name);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 현재 프로토타입에는 메서드가 두 개입니다.</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="title class_">Object</span>.<span class="title function_">getOwnPropertyNames</span>(<span class="title class_">User</span>.<span class="property"><span class="keyword">prototype</span></span>)); <span class="comment">// constructor, getFullName</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -206,7 +370,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-03 19:37:28" itemprop="dateModified" datetime="2022-07-03T19:37:28+09:00">2022-07-03</time>
+      <time title="Modified: 2022-07-04 14:17:41" itemprop="dateModified" datetime="2022-07-04T14:17:41+09:00">2022-07-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -232,14 +396,7 @@
 <p>이럴 때 new 연산자와 생성자 함수에서 배운 new function을 사용할 수 있습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">first,last</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">firstName</span>=first</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">lastName</span>=last</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">getFullName</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>   <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span> `</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> names=<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&#x27;mina&#x27;</span>,<span class="string">&#x27;kim&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> amy =<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&#x27;Amy&#x27;</span>,<span class="string">&#x27;Clarke&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> neo =<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&#x27;Neo&#x27;</span>,<span class="string">&#x27;Smith&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(names)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(amy.<span class="title function_">getFullName</span>())</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(neo.<span class="title function_">getFullName</span>())</span><br></pre></td></tr></table></figure>
 
-<h2 id="클래스가-하는일"><a href="#클래스가-하는일" class="headerlink" title="클래스가 하는일"></a>클래스가 하는일</h2><p>class User {…} 문법 구조가 진짜 하는 일은 다음과 같습니다.</p>
-<p>User라는 이름을 가진 함수를 만듭니다. 함수 본문은 생성자 메서드 constructor에서 가져옵니다. 생성자 메서드가 없으면 본문이 비워진 채로 함수가 만들어집니다.<br>getFullName 같은 클래스 내에서 정의한 메서드를 User.prototype에 저장합니다.<br>new User를 호출해 객체를 만들고, 객체의 메서드를 호출하면 함수의 prototype 프로퍼티에서 설명한 것처럼 메서드를 prototype 프로퍼티를 통해 가져옵니다. 이 과정이 있기 때문에 객체에서 클래스 메서드에 접근할 수 있습니다.</p>
-<p>지금까지 했던 설명을 코드로 표현하면 밑에 부분과 같습니다</p>
-<p>&#96;&#96;&#96;javascript<br>class User {<br>  constructor(name) { this.name &#x3D; name; }<br>    getFullName(){<br>        return   <code>$&#123;this.firstName&#125; $&#123;this.lastName&#125; </code><br>    }<br>}</p>
-<p>&#x2F;&#x2F; 클래스는 함수입니다.<br>alert(typeof User); &#x2F;&#x2F; function</p>
-<p>&#x2F;&#x2F; 정확히는 생성자 메서드와 동일합니다.<br>alert(User &#x3D;&#x3D;&#x3D; User.prototype.constructor); &#x2F;&#x2F; true</p>
-<p>&#x2F;&#x2F; 클래스 내부에서 정의한 메서드는 User.prototype에 저장됩니다.<br>alert(User.prototype.sayHi); &#x2F;&#x2F; alert(this.name);</p>
-<p>&#x2F;&#x2F; 현재 프로토타입에는 메서드가 두 개입니다.<br>alert(Object.getOwnPropertyNames(User.prototype)); &#x2F;&#x2F; constructor, getFullName</p>
+
 
       
     </div>
