@@ -122,7 +122,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -162,6 +162,197 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/11/this-binding-arrow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/11/this-binding-arrow/" class="post-title-link" itemprop="url">this (binding arrow)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-11 23:05:00 / Modified: 23:33:16" itemprop="dateCreated datePublished" datetime="2022-07-11T23:05:00+09:00">2022-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="arrow-function-이전의-this"><a href="#arrow-function-이전의-this" class="headerlink" title="arrow function 이전의 this"></a>arrow function 이전의 this</h2><p>바인딩 되지 않은 this<br>화살표 함수가 나오기 전까지의 javascript는,<br>새로운 함수는, 어떻게 그 함수가 호출되는지에 따라  자신의 this 값을 정의했습니다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;</span><br><span class="line">  // Person() 생성자는 `this`를 자신의 인스턴스로 정의.</span><br><span class="line">  this.age = 0;</span><br><span class="line"></span><br><span class="line">  setInterval(function growUp() &#123;</span><br><span class="line">    // 비엄격 모드에서, growUp() 함수는 `this`를</span><br><span class="line">    // 전역 객체로 정의하고, 이는 Person() 생성자에</span><br><span class="line">    // 정의된 `this`와 다름.</span><br><span class="line">    this.age++;</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var p = new Person();</span><br><span class="line"></span><br><span class="line">function Person() &#123;</span><br><span class="line">  var that = this;</span><br><span class="line">  that.age = 0;</span><br><span class="line"></span><br><span class="line">  setInterval(function growUp() &#123;</span><br><span class="line">    // 콜백은  `that` 변수를 참조하고 이것은 값이 기대한 객체이다.</span><br><span class="line">    that.age++;</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="arrow-function-시-this-call-또는-apply"><a href="#arrow-function-시-this-call-또는-apply" class="headerlink" title="arrow function 시 this(call 또는 apply)"></a>arrow function 시 this(call 또는 apply)</h2><p>화살표 함수는 자신의 this가 없습니다.  대신 화살표 함수를 둘러싸는 렉시컬 범위(lexical scope)의 this가 사용됩니다. 화살표 함수는 일반 변수 조회 규칙(normal variable lookup rules)을 따릅니다. 때문에 현재 범위에서 존재하지 않는 this를 찾을 때, 화살표 함수는 바로 바깥 범위에서 this를 찾는것으로 검색을 끝내게 됩니다.</p>
+<p>따라서 다음 코드에서 setInterval에 전달 된 함수 내부의 this는 setInterval을 포함한 function의 this와 동일한 값을 갖습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder = &#123;</span><br><span class="line">  base : <span class="number">1</span>,</span><br><span class="line"></span><br><span class="line">  add : <span class="keyword">function</span>(<span class="params">a</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="title function_">f</span> = v =&gt; v + <span class="variable language_">this</span>.<span class="property">base</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">f</span>(a);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">addThruCall</span>: <span class="keyword">function</span>(<span class="params">a</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="title function_">f</span> = v =&gt; v + <span class="variable language_">this</span>.<span class="property">base</span>;</span><br><span class="line">    <span class="keyword">var</span> b = &#123;</span><br><span class="line">      base : <span class="number">2</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> f.<span class="title function_">call</span>(b, a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(adder.<span class="title function_">add</span>(<span class="number">1</span>));         <span class="comment">// 2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(adder.<span class="title function_">addThruCall</span>(<span class="number">1</span>)); <span class="comment">// 2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>화살표 함수에서는 this가 바인딩되지 않았기 때문에, call() 또는 apply() 메서드는  인자만 전달 할 수 있습니다. this는 무시됩니다. (this.base&#x3D;&#x3D;base)</p>
+<h2 id="바인딩-되지-않은-객체에서의-this"><a href="#바인딩-되지-않은-객체에서의-this" class="headerlink" title="바인딩 되지 않은 객체에서의 this"></a>바인딩 되지 않은 객체에서의 this</h2><p>화살표 함수는 arguments 객체를 바인드 하지 않습니다.  때문에, arguments는  그저 둘러싸는 범위(scope) 내 이름에 대한 참조입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="variable language_">arguments</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> <span class="title function_">arr</span> = (<span class="params"></span>) =&gt; <span class="variable language_">arguments</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="title function_">arr</span>(); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">n</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="title function_">f</span> = (<span class="params"></span>) =&gt; <span class="variable language_">arguments</span>[<span class="number">0</span>] + n; </span><br><span class="line">  <span class="comment">// foo&#x27;s implicit arguments binding. arguments[0] is n</span></span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">f</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(<span class="number">1</span>); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>화살표 함수는 자신의 arguments 객체가 없지만, 대부분의 경우에 나머지 매개변수를 이용하면 됩니다</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">n</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="title function_">f</span> = (<span class="params">...args</span>) =&gt; args[<span class="number">0</span>] + n;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">f</span>(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(<span class="number">1</span>); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/11/Javascript-Null-0-is-true/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/11/Javascript-Null-0-is-true/" class="post-title-link" itemprop="url">Javascript - Null >= 0 is true</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-11 22:06:00 / Modified: 22:27:04" itemprop="dateCreated datePublished" datetime="2022-07-11T22:06:00+09:00">2022-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Javascript-Null-gt-x3D-0-is-true"><a href="#Javascript-Null-gt-x3D-0-is-true" class="headerlink" title="Javascript - Null &gt;&#x3D; 0 is true"></a>Javascript - Null &gt;&#x3D; 0 is true</h2><p>자바스크립트 기초 공부를 다시 듣던 중 흥미있는 것을 발견했다<br>Null&#x3D;&#x3D;0 false 인데 왜 Null &gt;&#x3D; 0 은 왜 true일까</p>
+<p>스펙 문서에 따르면, &gt;, &lt; 비교 연산자는 Abstract Relational Comparison Algorithm이라는 알고리즘을 사용하여 구문의 true&#x2F;false를 판정한다.<br><a target="_blank" rel="noopener" href="https://interglacial.com/javascript_spec/a-11.html#a-11.8.5">https://interglacial.com/javascript_spec/a-11.html#a-11.8.5</a></p>
+<p>전체적인 내용은 빼고 결과만 살펴보자</p>
+<ol>
+<li>x가 null이고 y가 undefined면, true를 리턴.</li>
+<li>x가 undefined이고 y가 null면, true를 리턴.</li>
+<li>Type(x)가 Number이고 Type(y)가 String이면, x &#x3D;&#x3D; ToNumber(y)의 결과를 리턴.</li>
+<li>Type(x)가 String이고 Type(y)가 Number이면, ToNumber(x) &#x3D;&#x3D; y의 결과를 리턴</li>
+<li>Type(x)가 Boolean이면, ToNumber(x) &#x3D;&#x3D; y의 결과를 리턴.</li>
+<li>Type(y)가 Boolean이면, x &#x3D;&#x3D; ToNumber(y)의 결과를 리턴.</li>
+<li>Type(x)가 String 또는 Number이고, Type(y)가 Object이면, x &#x3D;&#x3D; ToPrimitive(y)의 결과를 리턴.</li>
+<li>Type(x)가 Object이고, Type(y)가 String 또는 Number이면, ToPrimitive(x)&#x3D;&#x3D; y의 결과를 리턴.</li>
+<li>false를 리턴.<br>ToPrimitive은 형변환 함수이다<br><a target="_blank" rel="noopener" href="https://ko.javascript.info/object-toprimitive">https://ko.javascript.info/object-toprimitive</a></li>
+</ol>
+<p>ToPrimitive를 사용하면 숫자형이나 문자형으로의 형 변환을 원하는 대로 조절할 수 있습니다.</p>
+<p>null과 0은 다른 타입이므로 2~8번을 살펴보면 모두 해당하지 않고, 9번 false이다<br>따라서 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="number">0</span>; <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> !==<span class="number">0</span> ; <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> &gt;= <span class="number">0</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>수학적으로, 두 수 x(null)와 y(0)가 있을 때, x(null)가 y(0) 보다 작지 않다 면, x(null)는 y(0) 보다 반드시 크거나 같다 . 그렇기에</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> &gt;= <span class="number">0</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>라고 할 수 있다.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -892,89 +1083,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/06/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/29/hello-world/" class="post-title-link" itemprop="url">first blog posting</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-06-29 19:11:11" itemprop="dateCreated datePublished" datetime="2022-06-29T19:11:11+09:00">2022-06-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-03 19:05:00" itemprop="dateModified" datetime="2022-07-03T19:05:00+09:00">2022-07-03</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="첫-블로그-포스팅"><a href="#첫-블로그-포스팅" class="headerlink" title="첫 블로그 포스팅"></a>첫 블로그 포스팅</h2><h3 id="6월부터-차근차근"><a href="#6월부터-차근차근" class="headerlink" title="6월부터 차근차근"></a>6월부터 차근차근</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>hexo와 깃허브를 통해 쉽게 나의 블로그를 개설하게 되었다. </p>
-<ol>
-<li>조금 정리가 안된 부분을 한번씩 포스팅 </li>
-<li>과거 일본에서 배운거도 정리(마케팅,SEO,여행)</li>
-<li>취업할때까지 화이팅~</li>
-</ol>
-<p>제 깃허브 주소는 <a target="_blank" rel="noopener" href="https://github.com/Jeong-hoyun/">이곳</a>입니다!<br>공부한거도 하나씩 commit 하면서 정리하고 프로젝트 작업도 병행할 예정입니다</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 </div>
   </main>
