@@ -199,9 +199,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-07-12 22:04:00 / Modified: 22:50:46" itemprop="dateCreated datePublished" datetime="2022-07-12T22:04:00+09:00">2022-07-12</time>
+      <time title="Created: 2022-07-12 22:04:00" itemprop="dateCreated datePublished" datetime="2022-07-12T22:04:00+09:00">2022-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-15 17:45:31" itemprop="dateModified" datetime="2022-07-15T17:45:31+09:00">2022-07-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -223,7 +229,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><p>Promise 를 좀 직관적으로 설명해보고자 블로그로 정리</p>
+          <h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><p>좀 직관적으로 설명해보고자 블로그로 정리하고 있다.<br><br>추가적인 내용이 있다면 한번씩 수정할 예정</p>
+<p>중요한 점은 왜 프로미스를 써야하는가란 점이다.<br>react를 공부하다보면 비동기를 처리해야하는 곳이 점차 많아진다.<br>비동기를 좀 더 명확하게 보관하고 반환하는 작업을 하는 javascript function이 바로 Promise라는 것을 알고 강의를 찾아서 들었다. <br><br>콜백지옥 처리와 비동기 함수를 원하는 때에 쓸 수 있다는 것은 리엑트 개발을 해보니 중요한 것을 알게 되었다. 예를 들어 setstate 같은 기능이 비동기이기 때문에 promise를 이용하거나 async 를 써보는 방식도 가능하지 않을까? 아직 확실하지 않지만 가능성이 있어보인다. 그렇게 쓴다면 원하는 데이터를 보다 동적으로 쓰기위해서라도 promise 개념은 정확하게 숙지할 필요가 있어보인다</p>
+<p>밑의 내용은 공식문서 내용을 내 방식으로 정리해보았다.</p>
 <ol>
 <li>Promise 는 객체이다 </li>
 <li>new 키워드와 생성자를 필요로 한다</li>
@@ -236,13 +244,13 @@
 <h3 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a>Promise.all(iterable)</h3><p>한번에 많은 양의 비동기 처리를 담당할때나 여러 프로미스의 결과를 집계할 때 유용하게 사용가능하다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise1 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> promise2 = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">const</span> promise3 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">all</span>([promise1, promise2, promise3]).<span class="title function_">then</span>(<span class="function">(<span class="params">values</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(values);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// expected output: Array [3, 42, &quot;foo&quot;]</span></span><br></pre></td></tr></table></figure>
 <p>순회 가능한 객체(promise1,promise2,promise3)에 프로미스가 아닌 값이 들어있다면 무시하지만, 이행 시 결과 배열에는 포함합니다.</p>
-<h3 id="Promise-allSettled"><a href="#Promise-allSettled" class="headerlink" title="Promise.allSettled()"></a>Promise.allSettled()</h3><p>Promise.allSettled() 메서드는 주어진 모든 프로미스가 실행되는 것은 Promise.all과 같지만<br>각 프로미스에 대한 결과값도 확인해준다.</p>
+<h3 id="Promise-allSettled"><a href="#Promise-allSettled" class="headerlink" title="Promise.allSettled()"></a>Promise.allSettled()</h3><p>주어진 모든 프로미스가 실행되는 것은 Promise.all과 같지만<br>각 프로미스에 대한 결과값도 확인해준다.</p>
 <ol>
 <li>대기(pending): 이행하지도, 거부하지도 않은 초기 상태.</li>
 <li>이행(fulfilled): 연산이 성공적으로 완료됨.</li>
 <li>거부(rejected): 연산이 실패함.</li>
 </ol>
-<p>일반적으로 서로의 성공 여부에 관련 없는 여러 비동기 작업을 수행해야 하거나, 항상 각 프로미스의 실행 결과를 알고 싶을 때 혹은 서로 연관된 작업을 수행하거나, 하나라도 거부 당했을 때 즉시 거부하고 싶을 때 사용하면 좋을듯 하다.</p>
+<p>위의 두개의 all기능과 allSettled기능은 비동기데이터or이벤트를 한번에 실행할때 좋은 방식이라고 생각한다. 실전에 사용한다면 한번 더 여기에 추가할 예정이다</p>
 
       
     </div>
@@ -297,9 +305,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-07-11 23:05:00 / Modified: 23:33:16" itemprop="dateCreated datePublished" datetime="2022-07-11T23:05:00+09:00">2022-07-11</time>
+      <time title="Created: 2022-07-11 23:05:00" itemprop="dateCreated datePublished" datetime="2022-07-11T23:05:00+09:00">2022-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-15 17:57:53" itemprop="dateModified" datetime="2022-07-15T17:57:53+09:00">2022-07-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -321,21 +335,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="arrow-function-이전의-this"><a href="#arrow-function-이전의-this" class="headerlink" title="arrow function 이전의 this"></a>arrow function 이전의 this</h2><p>바인딩 되지 않은 this<br>화살표 함수가 나오기 전까지의 javascript는,<br>새로운 함수는, 어떻게 그 함수가 호출되는지에 따라  자신의 this 값을 정의했습니다.</p>
+          <p>javascript를 공부하다보면 this의 정의가 다른 언어와 생각보다 다르다라는 것을 느껴 여러 강의를 찾아보고 내용을 정리하고 다시한번 공식문서를 통해서 내용을 정리하였다. </p>
+<p>이 부분이 왜 중요한가를 다시 느낀 것은 역시 리엑트를 공부하면서 느꼈다.<br>this.state <br> this.setstate 와 같은 방식의 this사용부터 arrow function에서 this를<br>사용하고 props 방식도 결국 this를 통해서 사용하기에 정리를 해보고자 한다.  </p>
+<h3 id="arrow-function-이전의-this"><a href="#arrow-function-이전의-this" class="headerlink" title="arrow function 이전의 this"></a>arrow function 이전의 this</h3><p>바인딩 되지 않은 this<br>화살표 함수가 나오기 전까지의 javascript는,<br>새로운 함수는, 어떻게 그 함수가 호출되는지에 따라 자신의 this 값을 정의</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;</span><br><span class="line">  // Person() 생성자는 `this`를 자신의 인스턴스로 정의.</span><br><span class="line">  this.age = 0;</span><br><span class="line"></span><br><span class="line">  setInterval(function growUp() &#123;</span><br><span class="line">    // 비엄격 모드에서, growUp() 함수는 `this`를</span><br><span class="line">    // 전역 객체로 정의하고, 이는 Person() 생성자에</span><br><span class="line">    // 정의된 `this`와 다름.</span><br><span class="line">    this.age++;</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var p = new Person();</span><br><span class="line"></span><br><span class="line">function Person() &#123;</span><br><span class="line">  var that = this;</span><br><span class="line">  that.age = 0;</span><br><span class="line"></span><br><span class="line">  setInterval(function growUp() &#123;</span><br><span class="line">    // 콜백은  `that` 변수를 참조하고 이것은 값이 기대한 객체이다.</span><br><span class="line">    that.age++;</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="arrow-function-시-this-call-또는-apply"><a href="#arrow-function-시-this-call-또는-apply" class="headerlink" title="arrow function 시 this(call 또는 apply)"></a>arrow function 시 this(call 또는 apply)</h2><p>화살표 함수는 자신의 this가 없습니다.  대신 화살표 함수를 둘러싸는 렉시컬 범위(lexical scope)의 this가 사용됩니다. 화살표 함수는 일반 변수 조회 규칙(normal variable lookup rules)을 따릅니다. 때문에 현재 범위에서 존재하지 않는 this를 찾을 때, 화살표 함수는 바로 바깥 범위에서 this를 찾는것으로 검색을 끝내게 됩니다.</p>
-<p>따라서 다음 코드에서 setInterval에 전달 된 함수 내부의 this는 setInterval을 포함한 function의 this와 동일한 값을 갖습니다.</p>
+<h3 id="arrow-function-시-this-call-또는-apply"><a href="#arrow-function-시-this-call-또는-apply" class="headerlink" title="arrow function 시 this(call 또는 apply)"></a>arrow function 시 this(call 또는 apply)</h3><p>화살표 함수는 자신의 this가 없다. 대신 화살표 함수를 둘러싸는 렉시컬 범위(lexical scope)의 this가 사용된다. 화살표 함수는 일반 변수 조회 규칙(normal variable lookup rules)을 따르며,현재 범위에서 존재하지 않는 this를 찾을 때, 화살표 함수는 바로 바깥 범위에서 this를 찾는것으로 검색을 끝내게 된다.<br></p>
+<p>다음 코드에서 setInterval에 전달 된 함수 내부의 this는 setInterval을 포함한 function의 this와 동일한 값을 화살표 함수에서는 this가 바인딩되지 않았기 때문에, call() 또는 apply() 메서드는 인자만 전달 할 수 있습니다. this는 무시됩니다. (this.base&#x3D;&#x3D;base)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> adder = &#123;</span><br><span class="line">  base : <span class="number">1</span>,</span><br><span class="line"></span><br><span class="line">  add : <span class="keyword">function</span>(<span class="params">a</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="title function_">f</span> = v =&gt; v + <span class="variable language_">this</span>.<span class="property">base</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">f</span>(a);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">addThruCall</span>: <span class="keyword">function</span>(<span class="params">a</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="title function_">f</span> = v =&gt; v + <span class="variable language_">this</span>.<span class="property">base</span>;</span><br><span class="line">    <span class="keyword">var</span> b = &#123;</span><br><span class="line">      base : <span class="number">2</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> f.<span class="title function_">call</span>(b, a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(adder.<span class="title function_">add</span>(<span class="number">1</span>));         <span class="comment">// 2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(adder.<span class="title function_">addThruCall</span>(<span class="number">1</span>)); <span class="comment">// 2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>화살표 함수에서는 this가 바인딩되지 않았기 때문에, call() 또는 apply() 메서드는  인자만 전달 할 수 있습니다. this는 무시됩니다. (this.base&#x3D;&#x3D;base)</p>
-<h2 id="바인딩-되지-않은-객체에서의-this"><a href="#바인딩-되지-않은-객체에서의-this" class="headerlink" title="바인딩 되지 않은 객체에서의 this"></a>바인딩 되지 않은 객체에서의 this</h2><p>화살표 함수는 arguments 객체를 바인드 하지 않습니다.  때문에, arguments는  그저 둘러싸는 범위(scope) 내 이름에 대한 참조입니다.</p>
+
+<h3 id="바인딩-되지-않은-객체에서의-this"><a href="#바인딩-되지-않은-객체에서의-this" class="headerlink" title="바인딩 되지 않은 객체에서의 this"></a>바인딩 되지 않은 객체에서의 this</h3><p>화살표 함수는 arguments 객체를 바인드 하지 않습니다.  때문에, arguments는  그저 둘러싸는 범위(scope) 내 이름에 대한 참조입니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="variable language_">arguments</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> <span class="title function_">arr</span> = (<span class="params"></span>) =&gt; <span class="variable language_">arguments</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="title function_">arr</span>(); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">n</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="title function_">f</span> = (<span class="params"></span>) =&gt; <span class="variable language_">arguments</span>[<span class="number">0</span>] + n; </span><br><span class="line">  <span class="comment">// foo&#x27;s implicit arguments binding. arguments[0] is n</span></span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">f</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(<span class="number">1</span>); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 <p>화살표 함수는 자신의 arguments 객체가 없지만, 대부분의 경우에 나머지 매개변수를 이용하면 됩니다</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">n</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="title function_">f</span> = (<span class="params">...args</span>) =&gt; args[<span class="number">0</span>] + n;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">f</span>(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(<span class="number">1</span>); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 
 
-
-
+<p>리엑트에서 this의 사용방식에 대해서도 좀 더 정리를 해볼 생각이다.공식문서를 통해서 한번더 테스트 해보고 공부를 좀 더 해보고자 한다.</p>
 
       
     </div>
@@ -488,9 +503,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-07-07 21:21:00 / Modified: 21:43:59" itemprop="dateCreated datePublished" datetime="2022-07-07T21:21:00+09:00">2022-07-07</time>
+      <time title="Created: 2022-07-07 21:21:00" itemprop="dateCreated datePublished" datetime="2022-07-07T21:21:00+09:00">2022-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-15 18:01:40" itemprop="dateModified" datetime="2022-07-15T18:01:40+09:00">2022-07-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -512,7 +533,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="DOM이란-무엇인가"><a href="#DOM이란-무엇인가" class="headerlink" title="DOM이란 무엇인가"></a>DOM이란 무엇인가</h2><p>웹 서비스 개발은 브라우저와 밀접한 관련이 있습니다. 모든 서비스는 사실 웹 브라우저를 바탕으로 실행되며 이 브라우저와 관련된 객체들의 집합을 브라우저 객체 모델(BOM: Browser Object Model)이라고 부릅니다.<br>이 브라우저 객체 모델(BOM)을 이용해서 Browser와 관련된 기능들을 구성합니다. 브라우저 객체 모델(BOM)의 최상위 객체는 window라는 객체입니다. DOM은 이 window 객체의 하위 객체이기도 합니다.<br>DOM은 이 BOM  중의 하나이며  Document Object Model의 약어입니다. 또한 객체로 문서 구조를 표현하는 방법으로 XML이나 HTML로 작성합니다.</p>
+          <p>웹 프론트엔드의 기본이라 불리는 DOM을 다시한번 정리해보고자 한다. 이것을 보고 왜 react가 버츄얼 돔을 쓰는지 DOM이란것을 통해서 어떤식으로 HTML을 다루는지 한번 더 공부해보고자 정리하였다.</p>
+<h2 id="DOM이란-무엇인가"><a href="#DOM이란-무엇인가" class="headerlink" title="DOM이란 무엇인가"></a>DOM이란 무엇인가</h2><p>웹 서비스 개발은 브라우저와 밀접한 관련이 있습니다. 모든 서비스는 사실 웹 브라우저를 바탕으로 실행되며 이 브라우저와 관련된 객체들의 집합을 브라우저 객체 모델(BOM: Browser Object Model)이라고 부릅니다.<br>이 브라우저 객체 모델(BOM)을 이용해서 Browser와 관련된 기능들을 구성합니다. 브라우저 객체 모델(BOM)의 최상위 객체는 window라는 객체입니다. DOM은 이 window 객체의 하위 객체이기도 합니다.<br>DOM은 이 BOM  중의 하나이며  Document Object Model의 약어입니다. 또한 객체로 문서 구조를 표현하는 방법으로 XML이나 HTML로 작성합니다.</p>
 <p>웹 브라우저는 DOM을 활용하여 객체에 자바스크립트와 CSS를 사용합니다. DOM은 트리 형태라서 특정 노드를 찾거나 수정하거나 제거하거나 원하는 곳에 삽입할 수 있습니다.<br><br><img src="https://thebook.io/img/080203/039.jpg" alt="DOM tree model" title="DOM Tree model"> </p>
 <p>DOM model 형태의 html 에서 문제점은 바로 동적 UI에 최적화되어 있지 않다는 것입니다. HTML은 자체적으로는 정적입니다. 자바스크립트와 같은 언어로 동적으로 활용할 수 있게되어 보다 보기 좋은 사이트들을 만들 수 있게 되었습니다. javascript 에서는 밑의 방식으로 사용할 수 있다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paragraphs = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;P&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// paragraphs[0] is the first &lt;p&gt; element</span></span><br><span class="line"><span class="comment">// paragraphs[1] is the second &lt;p&gt; element, etc.</span></span><br><span class="line"><span class="title function_">alert</span>(paragraphs[<span class="number">0</span>].<span class="property">nodeName</span>);</span><br><span class="line"><span class="comment">// p tag serch =&gt; p tag 0번째의 node네임을 alert</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -572,9 +594,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-07-07 20:58:00 / Modified: 21:08:39" itemprop="dateCreated datePublished" datetime="2022-07-07T20:58:00+09:00">2022-07-07</time>
+      <time title="Created: 2022-07-07 20:58:00" itemprop="dateCreated datePublished" datetime="2022-07-07T20:58:00+09:00">2022-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-15 18:03:42" itemprop="dateModified" datetime="2022-07-15T18:03:42+09:00">2022-07-15</time>
     </span>
 
   
@@ -587,7 +615,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Git-flow"><a href="#Git-flow" class="headerlink" title="Git-flow"></a>Git-flow</h2><p>Git-flow에는 5가지 종류의 브랜치가 존재합니다. </p>
+          <p>현업에서 개발단계 릴리즈 전 단계에서 어떤식으로 개발을 진행하는지 git flow로 좀 더 명확하게 알게 되었다. 단계를 보면 기술 출시전 개발 단계에서 어떤 식으로 일을 진행하는지 툴을 통해 명확하게 파악되었고 실질적으로 git 을 사용하면서 협업의 기술을 쌓아올릴수 있을 것 같았다.</p>
+<h2 id="Git-flow"><a href="#Git-flow" class="headerlink" title="Git-flow"></a>Git-flow</h2><p>Git-flow에는 5가지 종류의 브랜치가 존재합니다. </p>
 <ul>
 <li>main : 제품으로 출시될 수 있는 브랜치(master)</li>
 <li>develop : 다음 출시 버전을 개발하는 브랜치</li>
@@ -941,9 +970,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-07-04 14:17:00 / Modified: 14:20:20" itemprop="dateCreated datePublished" datetime="2022-07-04T14:17:00+09:00">2022-07-04</time>
+      <time title="Created: 2022-07-04 14:17:00" itemprop="dateCreated datePublished" datetime="2022-07-04T14:17:00+09:00">2022-07-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-15 18:10:36" itemprop="dateModified" datetime="2022-07-15T18:10:36+09:00">2022-07-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -965,8 +1000,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="클래스가-하는일"><a href="#클래스가-하는일" class="headerlink" title="클래스가 하는일"></a>클래스가 하는일</h2><p>class User {…} 문법 구조가 진짜 하는 일은 다음과 같습니다.</p>
-<p>User라는 이름을 가진 함수를 만듭니다. 함수 본문은 생성자 메서드 constructor에서 가져옵니다. 생성자 메서드가 없으면 본문이 비워진 채로 함수가 만들어집니다.<br>getFullName 같은 클래스 내에서 정의한 메서드를 User.prototype에 저장합니다.<br>new User를 호출해 객체를 만들고, 객체의 메서드를 호출하면 함수의 prototype 프로퍼티에서 설명한 것처럼 메서드를 prototype 프로퍼티를 통해 가져옵니다. 이 과정이 있기 때문에 객체에서 클래스 메서드에 접근할 수 있습니다.</p>
+          <p>지난번 정리한 내용에 클래스가 만들어졌을때의 순서를 한번 정리해보았다.</p>
+<h2 id="클래스가-하는일"><a href="#클래스가-하는일" class="headerlink" title="클래스가 하는일"></a>클래스가 하는일</h2><p>class User {…} 문법 구조가 진짜 하는 일의 순서를 </p>
+<ol>
+<li>User라는 이름을 가진 함수생성. </li>
+<li>생성자 메서드 constructor에서 작성</li>
+<li>생성자 메서드가 없으면 본문이 비워진 채로 함수가 만들어짐</li>
+<li>getFullName 같은 클래스 내에서 정의한 메서드를 User.prototype에 저장</li>
+<li>new User를 호출해 객체를 만들고, 객체의 메서드를 호출</li>
+<li>함수의 prototype 프로퍼티에서 설명한 것처럼 메서드를 prototype 프로퍼티를 통해 가져옵니다.<br>이 과정이 있기 때문에 객체에서 클래스 메서드에 접근할 수 있습니다.</li>
+</ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name</span>) &#123; <span class="variable language_">this</span>.<span class="property">name</span> = name; &#125;</span><br><span class="line">    <span class="title function_">getFullName</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스는 함수입니다.</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="keyword">typeof</span> <span class="title class_">User</span>); <span class="comment">// function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 정확히는 생성자 메서드와 동일합니다.</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="title class_">User</span> === <span class="title class_">User</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 클래스 내부에서 정의한 메서드는 User.prototype에 저장됩니다.</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="title class_">User</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHi</span>); <span class="comment">// alert(this.name);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 현재 프로토타입에는 메서드가 두 개입니다.</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="title class_">Object</span>.<span class="title function_">getOwnPropertyNames</span>(<span class="title class_">User</span>.<span class="property"><span class="keyword">prototype</span></span>)); <span class="comment">// constructor, getFullName</span></span><br></pre></td></tr></table></figure>
       
     </div>
@@ -1029,7 +1072,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-04 14:17:41" itemprop="dateModified" datetime="2022-07-04T14:17:41+09:00">2022-07-04</time>
+      <time title="Modified: 2022-07-15 18:13:34" itemprop="dateModified" datetime="2022-07-15T18:13:34+09:00">2022-07-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1051,11 +1094,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="javascript-클래스-사용법-예시1"><a href="#javascript-클래스-사용법-예시1" class="headerlink" title="javascript 클래스 사용법 예시1"></a>javascript 클래스 사용법 예시1</h2><p>실무에서 개발을 할때 (react,vue) 물건과 같은 오브젝트화가 필요한 경우가 많다<br>또한 동일한 종류의 객체를 여러 개 생성해야 하는 경우도 필요하다</p>
-<p>이럴 때 new 연산자와 생성자 함수에서 배운 new function을 사용할 수 있습니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">first,last</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">firstName</span>=first</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">lastName</span>=last</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">getFullName</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>   <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span> `</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> names=<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&#x27;mina&#x27;</span>,<span class="string">&#x27;kim&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> amy =<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&#x27;Amy&#x27;</span>,<span class="string">&#x27;Clarke&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> neo =<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&#x27;Neo&#x27;</span>,<span class="string">&#x27;Smith&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(names)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(amy.<span class="title function_">getFullName</span>())</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(neo.<span class="title function_">getFullName</span>())</span><br></pre></td></tr></table></figure>
-
-
+          <h2 id="javascript-클래스-사용법-예시1"><a href="#javascript-클래스-사용법-예시1" class="headerlink" title="javascript 클래스 사용법 예시1"></a>javascript 클래스 사용법 예시1</h2><p>현재 react 에서 클래스형 component를 사용하는 일은 드물지만 클래스를 통한 객체 방식의 이해는 필수적이다. javascript에서는 function도 객체이며 array도 객체이다.<br>객체화 하여서 하나의 데이터를 뽑아오는 일은 심심하면 일어나는 일이라서 한번 더 정리해보고자 공식 문서의 힘을 빌렸다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">height, width</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">height</span> = height;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">width</span> = width;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// Getter</span></span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">area</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="title function_">calcArea</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 메서드</span></span><br><span class="line">  <span class="title function_">calcArea</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">height</span> * <span class="variable language_">this</span>.<span class="property">width</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> square = <span class="keyword">new</span> <span class="title class_">Rectangle</span>(<span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(square.<span class="property">area</span>); <span class="comment">// 100</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> 리엑트에서 일어나는 일의 대부분이 클래스 객체에서도 발생한다. 바인딩 문제,this문제, 상속을 통한 새로운 기능 확보 등등 간단하게 다시 한번 정리가 필요한 부분이 생긴다면 추가할 예정이다.</p>
 
       
     </div>
