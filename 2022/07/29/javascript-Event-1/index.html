@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jeong-hoyun.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="javascript Event를 정리해보자javascript Event는 매우 방대해서 아직 안써본 기술들이 많았다. 그중에 잘 쓰지 않았던 것들은 한번 정리해보려고 한다.   Event.stopPropagation()자바스크립트에서 stopPropagation() 메서드는 event 객체의 버블링을 제거하는데 유용한 메서드이다.예를 들어 검색을 하고 클릭">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript Event(1)">
+<meta property="og:url" content="https://jeong-hoyun.github.io/2022/07/29/javascript-Event-1/index.html">
+<meta property="og:site_name" content="frontend 개발중">
+<meta property="og:description" content="javascript Event를 정리해보자javascript Event는 매우 방대해서 아직 안써본 기술들이 많았다. 그중에 잘 쓰지 않았던 것들은 한번 정리해보려고 한다.   Event.stopPropagation()자바스크립트에서 stopPropagation() 메서드는 event 객체의 버블링을 제거하는데 유용한 메서드이다.예를 들어 검색을 하고 클릭">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-29T05:09:00.000Z">
+<meta property="article:modified_time" content="2022-07-29T05:26:33.372Z">
+<meta property="article:author" content="jeong-hoyun">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jeong-hoyun.github.io/2022/07/29/javascript-Event-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/07/29/javascript-Event-1/","path":"2022/07/29/javascript-Event-1/","title":"javascript Event(1)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>javascript Event(1) | frontend 개발중</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">frontend 개발중</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">front-end+maketing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript-Event%EB%A5%BC-%EC%A0%95%EB%A6%AC%ED%95%B4%EB%B3%B4%EC%9E%90"><span class="nav-number">1.</span> <span class="nav-text">javascript Event를 정리해보자</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jeong-hoyun</p>
+  <div class="site-description" itemprop="description">과거 마케딩 경험도 가끔씩 올릴 예정입니다</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/29/javascript-Event-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="javascript Event(1) | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javascript Event(1)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-29 14:09:00 / Modified: 14:26:33" itemprop="dateCreated datePublished" datetime="2022-07-29T14:09:00+09:00">2022-07-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="javascript-Event를-정리해보자"><a href="#javascript-Event를-정리해보자" class="headerlink" title="javascript Event를 정리해보자"></a>javascript Event를 정리해보자</h2><p>javascript Event는 매우 방대해서 아직 안써본 기술들이 많았다. 그중에 잘 쓰지 않았던 것들은 한번 정리해보려고 한다. </p>
+<ol>
+<li>Event.stopPropagation()<br>자바스크립트에서 stopPropagation() 메서드는 event 객체의 버블링을 제거하는데 유용한 메서드이다.<br>예를 들어 검색을 하고 클릭을 하는 이벤트를 만들어두었을때 어느 순간에는 클릭만 되게 만들 필요가 있을 것이다. 이벤트 버블링<br>와 함께 매우 자주 사용되는 중요한 메서드입니다.</li>
+</ol>
+<p>여기서 event 버블링이란 이벤트가 연속하여 발생하는 버블 현상을 의미한다 .이벤트는 이벤트캡쳐링과 이벤트버블링으로 나타나는데 클릭이 발생한 경우를 예로들면 클릭 시점에 해당 위치에서 이벤트가 발생하고 발생하고 다시 겹쳐진 요소를 올라가면서 해당 엘리먼트의 이벤트를 다시 발생시키는 현상을 의미한다. </p>
+<p>리엑트 엘리먼트를 통한 방식에서도 유용하게 쓸수 있어보였다</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> div=<span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">div.<span class="property">innerText</span>=<span class="string">&#x27;testing&#x27;</span></span><br><span class="line">div.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>,<span class="function">()=&gt;</span>&#123;  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;test1!&#x27;</span>)  &#125;)</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">append</span>(div)</span><br><span class="line"><span class="keyword">let</span> div2=<span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>)</span><br><span class="line">div2.<span class="property">innerText</span>=<span class="string">&#x27;testing2&#x27;</span></span><br><span class="line">div2.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>,<span class="function">()=&gt;</span>&#123;  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;test2!&#x27;</span>)  &#125;)</span><br><span class="line">div.<span class="title function_">append</span>(div2)</span><br><span class="line"></span><br><span class="line"><span class="comment">//VM997:1 test1!</span></span><br><span class="line">div1을 클릭했을 때는 test1!만 출력</span><br><span class="line"><span class="comment">//VM1315:1 test2!</span></span><br><span class="line"><span class="comment">//VM997:1 test1!</span></span><br><span class="line">div2을 클릭했을 때는 이벤트 버블링 발생 둘다 출력</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>event.defaultPrevent()</li>
+</ol>
+<p>defaultPrevent는 기본적인 html의 기능을 막을 수 있는 메소드이다.체크박스의 클릭 기본 동작,a 태그의 링크 이동 select 선택 기능 전부 다 막을 수 있다. 실질적으로 필요한 경우는 다른 이벤트를 넣었을때 체크박스나 셀렉트와 같은 기본기능이 필요없을 경우에 사용할 수 있지않을까 생각한다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">checkName</span>(<span class="params">evt</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> charCode = evt.<span class="property">charCode</span>;</span><br><span class="line">  <span class="keyword">if</span> (charCode != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (charCode &lt; <span class="number">97</span> || charCode &gt; <span class="number">122</span>) &#123;</span><br><span class="line">      evt.<span class="title function_">preventDefault</span>();</span><br><span class="line">      <span class="title function_">displayWarning</span>(</span><br><span class="line">        <span class="string">&quot;영문 소문자만 입력하세요.&quot;</span></span><br><span class="line">        + <span class="string">&quot;\n&quot;</span> + <span class="string">&quot;charCode: &quot;</span> + charCode + <span class="string">&quot;\n&quot;</span></span><br><span class="line">      );</span><br><span class="line">      <span class="comment">//displayWarning는 경고창을 띄워줌</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위의 코드와 같이 영문 소문자만 입력가능하게 세팅을 만들 수도 있다. </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/29/javascript-Optional-chaining/" rel="prev" title="javascript Optional chaining">
+                  <i class="fa fa-chevron-left"></i> javascript Optional chaining
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jeong-hoyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

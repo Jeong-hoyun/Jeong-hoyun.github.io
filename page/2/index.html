@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -157,6 +157,291 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/11/Javascript-Null-0-is-true/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/11/Javascript-Null-0-is-true/" class="post-title-link" itemprop="url">Javascript - Null >= 0 is true</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-11 22:06:00 / Modified: 22:27:04" itemprop="dateCreated datePublished" datetime="2022-07-11T22:06:00+09:00">2022-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Javascript-Null-gt-x3D-0-is-true"><a href="#Javascript-Null-gt-x3D-0-is-true" class="headerlink" title="Javascript - Null &gt;&#x3D; 0 is true"></a>Javascript - Null &gt;&#x3D; 0 is true</h2><p>자바스크립트 기초 공부를 다시 듣던 중 흥미있는 것을 발견했다<br>Null&#x3D;&#x3D;0 false 인데 왜 Null &gt;&#x3D; 0 은 왜 true일까</p>
+<p>스펙 문서에 따르면, &gt;, &lt; 비교 연산자는 Abstract Relational Comparison Algorithm이라는 알고리즘을 사용하여 구문의 true&#x2F;false를 판정한다.<br><a target="_blank" rel="noopener" href="https://interglacial.com/javascript_spec/a-11.html#a-11.8.5">https://interglacial.com/javascript_spec/a-11.html#a-11.8.5</a></p>
+<p>전체적인 내용은 빼고 결과만 살펴보자</p>
+<ol>
+<li>x가 null이고 y가 undefined면, true를 리턴.</li>
+<li>x가 undefined이고 y가 null면, true를 리턴.</li>
+<li>Type(x)가 Number이고 Type(y)가 String이면, x &#x3D;&#x3D; ToNumber(y)의 결과를 리턴.</li>
+<li>Type(x)가 String이고 Type(y)가 Number이면, ToNumber(x) &#x3D;&#x3D; y의 결과를 리턴</li>
+<li>Type(x)가 Boolean이면, ToNumber(x) &#x3D;&#x3D; y의 결과를 리턴.</li>
+<li>Type(y)가 Boolean이면, x &#x3D;&#x3D; ToNumber(y)의 결과를 리턴.</li>
+<li>Type(x)가 String 또는 Number이고, Type(y)가 Object이면, x &#x3D;&#x3D; ToPrimitive(y)의 결과를 리턴.</li>
+<li>Type(x)가 Object이고, Type(y)가 String 또는 Number이면, ToPrimitive(x)&#x3D;&#x3D; y의 결과를 리턴.</li>
+<li>false를 리턴.<br>ToPrimitive은 형변환 함수이다<br><a target="_blank" rel="noopener" href="https://ko.javascript.info/object-toprimitive">https://ko.javascript.info/object-toprimitive</a></li>
+</ol>
+<p>ToPrimitive를 사용하면 숫자형이나 문자형으로의 형 변환을 원하는 대로 조절할 수 있습니다.</p>
+<p>null과 0은 다른 타입이므로 2~8번을 살펴보면 모두 해당하지 않고, 9번 false이다<br>따라서 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="number">0</span>; <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> !==<span class="number">0</span> ; <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> &gt;= <span class="number">0</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>수학적으로, 두 수 x(null)와 y(0)가 있을 때, x(null)가 y(0) 보다 작지 않다 면, x(null)는 y(0) 보다 반드시 크거나 같다 . 그렇기에</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> &gt;= <span class="number">0</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>라고 할 수 있다.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/07/javascript-DOM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/07/javascript-DOM/" class="post-title-link" itemprop="url">javascript DOM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-07 21:21:00" itemprop="dateCreated datePublished" datetime="2022-07-07T21:21:00+09:00">2022-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-15 18:01:40" itemprop="dateModified" datetime="2022-07-15T18:01:40+09:00">2022-07-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>웹 프론트엔드의 기본이라 불리는 DOM을 다시한번 정리해보고자 한다. 이것을 보고 왜 react가 버츄얼 돔을 쓰는지 DOM이란것을 통해서 어떤식으로 HTML을 다루는지 한번 더 공부해보고자 정리하였다.</p>
+<h2 id="DOM이란-무엇인가"><a href="#DOM이란-무엇인가" class="headerlink" title="DOM이란 무엇인가"></a>DOM이란 무엇인가</h2><p>웹 서비스 개발은 브라우저와 밀접한 관련이 있습니다. 모든 서비스는 사실 웹 브라우저를 바탕으로 실행되며 이 브라우저와 관련된 객체들의 집합을 브라우저 객체 모델(BOM: Browser Object Model)이라고 부릅니다.<br>이 브라우저 객체 모델(BOM)을 이용해서 Browser와 관련된 기능들을 구성합니다. 브라우저 객체 모델(BOM)의 최상위 객체는 window라는 객체입니다. DOM은 이 window 객체의 하위 객체이기도 합니다.<br>DOM은 이 BOM  중의 하나이며  Document Object Model의 약어입니다. 또한 객체로 문서 구조를 표현하는 방법으로 XML이나 HTML로 작성합니다.</p>
+<p>웹 브라우저는 DOM을 활용하여 객체에 자바스크립트와 CSS를 사용합니다. DOM은 트리 형태라서 특정 노드를 찾거나 수정하거나 제거하거나 원하는 곳에 삽입할 수 있습니다.<br><br><img src="https://thebook.io/img/080203/039.jpg" alt="DOM tree model" title="DOM Tree model"> </p>
+<p>DOM model 형태의 html 에서 문제점은 바로 동적 UI에 최적화되어 있지 않다는 것입니다. HTML은 자체적으로는 정적입니다. 자바스크립트와 같은 언어로 동적으로 활용할 수 있게되어 보다 보기 좋은 사이트들을 만들 수 있게 되었습니다. javascript 에서는 밑의 방식으로 사용할 수 있다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paragraphs = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;P&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// paragraphs[0] is the first &lt;p&gt; element</span></span><br><span class="line"><span class="comment">// paragraphs[1] is the second &lt;p&gt; element, etc.</span></span><br><span class="line"><span class="title function_">alert</span>(paragraphs[<span class="number">0</span>].<span class="property">nodeName</span>);</span><br><span class="line"><span class="comment">// p tag serch =&gt; p tag 0번째의 node네임을 alert</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>javascript 이외에도 DOM 은 여러 언어로도 표현 가능하다</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import xml.dom.minidom as m</span><br><span class="line">doc = m.parse(&quot;C:\\Projects\\Py\\chap1.xml&quot;);</span><br><span class="line">doc.nodeName # DOM property of document object;</span><br><span class="line">p_list = doc.getElementsByTagName(&quot;para&quot;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/07/git-flow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/07/git-flow/" class="post-title-link" itemprop="url">git flow (1)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-07 20:58:00" itemprop="dateCreated datePublished" datetime="2022-07-07T20:58:00+09:00">2022-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-15 18:03:42" itemprop="dateModified" datetime="2022-07-15T18:03:42+09:00">2022-07-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>현업에서 개발단계 릴리즈 전 단계에서 어떤식으로 개발을 진행하는지 git flow로 좀 더 명확하게 알게 되었다. 단계를 보면 기술 출시전 개발 단계에서 어떤 식으로 일을 진행하는지 툴을 통해 명확하게 파악되었고 실질적으로 git 을 사용하면서 협업의 기술을 쌓아올릴수 있을 것 같았다.</p>
+<h2 id="Git-flow"><a href="#Git-flow" class="headerlink" title="Git-flow"></a>Git-flow</h2><p>Git-flow에는 5가지 종류의 브랜치가 존재합니다. </p>
+<ul>
+<li>main : 제품으로 출시될 수 있는 브랜치(master)</li>
+<li>develop : 다음 출시 버전을 개발하는 브랜치</li>
+<li>feature : 기능을 개발하는 브랜치</li>
+<li>release : 이번 출시 버전을 준비하는 브랜치</li>
+<li>hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치</li>
+</ul>
+<h3 id="develop-branch"><a href="#develop-branch" class="headerlink" title="develop branch"></a>develop branch</h3><blockquote>
+<p>main에서 가장 가까운 branch입니다.<br>develop branch에서는 상시로 버그를 수정한 커밋들이 추가됩니다. 새로운 기능 추가 작업이 있는 경우 develop branch에서 feature 브랜치를 생성합니다. </p>
+</blockquote>
+<h3 id="feature-branch"><a href="#feature-branch" class="headerlink" title="feature branch"></a>feature branch</h3><blockquote>
+<p>feature branch에서는 언제나 develop branch에서부터 시작하게 됩니다. 기능 추가 작업이 완료되었다면 &gt;feature branch는 develop branch로 merge 됩니다. </p>
+</blockquote>
+<h3 id="release-branch"><a href="#release-branch" class="headerlink" title="release branch"></a>release branch</h3><blockquote>
+<p>develop에 이번 버전에 포함되는 모든 기능이 merge 되었다면 QA를 하기 위해 develop branch에서부터 &gt;release 브랜치를 생성합니다. 여러 상황에 따라 발생하는 버그들은 release branch에서 수정됩니다.<br>testing을 무사히 통과했다면 release branch를 main과 develop branch로 merge 합니다. 마지막으로 출시된 main branch에서 버전 태그를 추가합니다.</p>
+</blockquote>
+<h3 id="hotfix-branch"><a href="#hotfix-branch" class="headerlink" title="hotfix branch"></a>hotfix branch</h3><blockquote>
+<p>긴급 상황이 발생할 경우 main branch에 바로 출시할 수 있도록 작업하는 branch 입니다</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
