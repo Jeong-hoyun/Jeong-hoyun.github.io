@@ -119,12 +119,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -157,6 +157,89 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/04/typescript-interface/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/04/typescript-interface/" class="post-title-link" itemprop="url">typescript interface</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-04 13:44:00 / Modified: 13:53:39" itemprop="dateCreated datePublished" datetime="2022-08-04T13:44:00+09:00">2022-08-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/typescript/" itemprop="url" rel="index"><span itemprop="name">typescript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="타입스크립트-interface"><a href="#타입스크립트-interface" class="headerlink" title="타입스크립트 interface"></a>타입스크립트 interface</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">NewsFeed</span> <span class="keyword">extends</span> <span class="title class_">News</span>&#123;</span><br><span class="line">  <span class="comment">//News&amp; 를 통해서 공통으로 쓸부분은 따로 정의</span></span><br><span class="line">   <span class="attr">comments_count</span>:<span class="built_in">number</span>;</span><br><span class="line">   <span class="attr">points</span>:<span class="built_in">number</span>;</span><br><span class="line">   read?:<span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//type NewsFeed= News&amp;&#123;</span></span><br><span class="line">  <span class="comment">//News&amp; 를 통해서 공통으로 쓸부분은 따로 정의</span></span><br><span class="line"><span class="comment">//   comments_count:number;</span></span><br><span class="line"><span class="comment">//   points:number;</span></span><br><span class="line"><span class="comment">//   read?:boolean;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>공통적으로 사용하는 부분을 지정하는 방식이 TypeScript type alias 방식과 다르다는 것을 배웠다. interface는 class 와 비슷한 방식으로 전의 데이터를 받아들이는 상속 방식이며 alias방식으로도 상속은 가능하지만 어떤 것이 더 좋을지는 아직 잘 모르겠다</p>
+<h2 id="interface의-강력한-성능-1-readonly"><a href="#interface의-강력한-성능-1-readonly" class="headerlink" title="interface의 강력한 성능 1 readonly"></a>interface의 강력한 성능 1 readonly</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">News</span> &#123;</span><br><span class="line">  <span class="comment">//readonly 를 통해서 값이 변경되지 않고 읽을수만 있도록 강제처리</span></span><br><span class="line">   <span class="keyword">readonly</span> <span class="attr">id</span>:<span class="built_in">number</span>;</span><br><span class="line">   <span class="attr">title</span>:<span class="built_in">string</span>;</span><br><span class="line">   read?:<span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>데이터 베이스에서 값을 가져오는 기본 키(primary key)는 절대로 변경되어서는 안되는 값이기에 readonly 를 통해서 값이 변경되지 않고 읽을수만 있도록 강제처리하는 기능이다. javascript에서는 해본적이 없는 방식이기에 아마 push 와 같은 방식을 막아주는 기능이 아닐까 생각해본다</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -958,112 +1041,6 @@
 <p>간단한 예시말고도 많은 수의 경우는 어떻게 쓰는지도 공부하였다. </p>
 <h2 id="JSON-데이터를-불러올시의-useState"><a href="#JSON-데이터를-불러올시의-useState" class="headerlink" title="JSON 데이터를 불러올시의 useState"></a>JSON 데이터를 불러올시의 useState</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [inputs] = <span class="title function_">useState</span>(&#123;<span class="string">&quot;Search&quot;</span>:</span><br><span class="line">  [&#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;Bet on Revenge&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;2017&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt4964310&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span></span><br><span class="line">  :<span class="string">&quot;https://m.media-amazon.com/images/M/MV5BNzU1YzkzYzQtYTdkMS00ZWM1LThjOWQtMjg1NGIwM2I0MDc5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTkzMzMyNDA@._V1_SX300.jpg&quot;</span>&#125;</span><br><span class="line">  ,&#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;You Bet Your Life&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;1950–1961&quot;</span>,</span><br><span class="line">  <span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt0042171&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;series&quot;</span>,<span class="string">&quot;Poster&quot;</span>:<span class="string">&quot;https://m.media-amazon.com/images/M/MV5BNjQxNTllYzgtYjUwMS00NDhmLTgwYjUtMzc4NTlmZGI5YzhlXkEyXkFqcGdeQXVyNjE5MjUyOTM@._V1_SX300.jpg&quot;</span>&#125;</span><br><span class="line">  ,&#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;Bet Your Life&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;2004&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt0381980&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span>:</span><br><span class="line">  <span class="string">&quot;https://m.media-amazon.com/images/M/MV5BOTk1MzUyMjU3NV5BMl5BanBnXkFtZTcwNzkwMTY2MQ@@._V1_SX300.jpg&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;Early to Bet&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;1951&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt0043495&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span>:</span><br><span class="line">  <span class="string">&quot;https://m.media-amazon.com/images/M/MV5BODdhOWY4YmEtY2ZkZi00NWQ4LWE0NGQtOGZlZWFiN2QxNGRhXkEyXkFqcGdeQXVyNjc2NjkzNTg@._V1_SX300.jpg&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;The Top Bet&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;1991&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt0101780&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span>:</span><br><span class="line">  <span class="string">&quot;https://m.media-amazon.com/images/M/MV5BMTUzOTczNTc4NV5BMl5BanBnXkFtZTgwMzE0ODc2MzE@._V1_SX300.jpg&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;Don&#x27;t Bet on Blondes&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;1935&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt0026289&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span>:</span><br><span class="line">  <span class="string">&quot;https://m.media-amazon.com/images/M/MV5BM2I5M2ExOTctNzJkZi00OTRjLTkxMTMtODNiODE4ZGU3NWI4XkEyXkFqcGdeQXVyNjE5MjUyOTM@._V1_SX300.jpg&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;Bet Raise Fold&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;2013&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt2719370&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span>:</span><br><span class="line">  <span class="string">&quot;https://m.media-amazon.com/images/M/MV5BMTY3MDgwODE0OF5BMl5BanBnXkFtZTcwNzY0MTA4OQ@@._V1_SX300.jpg&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;Deadly Bet&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;1992&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt0104066&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span>:</span><br><span class="line">  <span class="string">&quot;https://m.media-amazon.com/images/M/MV5BMTk5MDg5OTU4MV5BMl5BanBnXkFtZTcwNDEwMDYxMQ@@._V1_SX300.jpg&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;Outside Bet&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;2012&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt1772422&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span>:</span><br><span class="line">  <span class="string">&quot;https://m.media-amazon.com/images/M/MV5BMTgzOTUxMzY3MV5BMl5BanBnXkFtZTcwNDk2MDc2Nw@@._V1_SX300.jpg&quot;</span>&#125;,</span><br><span class="line">  &#123;<span class="string">&quot;Title&quot;</span>:<span class="string">&quot;The Big Bet&quot;</span>,<span class="string">&quot;Year&quot;</span>:<span class="string">&quot;1987&quot;</span>,<span class="string">&quot;imdbID&quot;</span>:<span class="string">&quot;tt0088800&quot;</span>,<span class="string">&quot;Type&quot;</span>:<span class="string">&quot;movie&quot;</span>,<span class="string">&quot;Poster&quot;</span>:</span><br><span class="line">  <span class="string">&quot;https://m.media-amazon.com/images/M/MV5BMWY5OTc2YjEtZTVmOC00MTkwLWFiZmItMmQyYmQzZGE3OGUzXkEyXkFqcGdeQXVyMTY5Nzc4MDY@._V1_SX300.jpg&quot;</span>&#125;],</span><br><span class="line">  <span class="string">&quot;totalResults&quot;</span>:<span class="string">&quot;350&quot;</span>,<span class="string">&quot;Response&quot;</span>:<span class="string">&quot;True&quot;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 비구조화 할당을 통해 값 추출</span></span><br><span class="line">  <span class="keyword">const</span> arrayData= inputs.<span class="property">Search</span>.<span class="title function_">map</span>(<span class="function">(<span class="params">itme,index</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    &#123;itme.Title&#125; &#123;itme.Year&#125;    </span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">  &#125;</span><br><span class="line">  )</span><br><span class="line">    <span class="keyword">return</span>(</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123; arrayData&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
 <p>json 데이터 파싱하는 것에 시간이 엄청 걸린다는 것을 생각한다면 엄청 깔끔하게 결과를 UI에 표시할수 있게 되었다.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/12/javascript-promise/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/12/javascript-promise/" class="post-title-link" itemprop="url">javascript promise</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-07-12 22:04:00" itemprop="dateCreated datePublished" datetime="2022-07-12T22:04:00+09:00">2022-07-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-15 17:45:31" itemprop="dateModified" datetime="2022-07-15T17:45:31+09:00">2022-07-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><p>좀 직관적으로 설명해보고자 블로그로 정리하고 있다.<br><br>추가적인 내용이 있다면 한번씩 수정할 예정</p>
-<p>중요한 점은 왜 프로미스를 써야하는가란 점이다.<br>react를 공부하다보면 비동기를 처리해야하는 곳이 점차 많아진다.<br>비동기를 좀 더 명확하게 보관하고 반환하는 작업을 하는 javascript function이 바로 Promise라는 것을 알고 강의를 찾아서 들었다. <br><br>콜백지옥 처리와 비동기 함수를 원하는 때에 쓸 수 있다는 것은 리엑트 개발을 해보니 중요한 것을 알게 되었다. 예를 들어 setstate 같은 기능이 비동기이기 때문에 promise를 이용하거나 async 를 써보는 방식도 가능하지 않을까? 아직 확실하지 않지만 가능성이 있어보인다. 그렇게 쓴다면 원하는 데이터를 보다 동적으로 쓰기위해서라도 promise 개념은 정확하게 숙지할 필요가 있어보인다</p>
-<p>밑의 내용은 공식문서 내용을 내 방식으로 정리해보았다.</p>
-<ol>
-<li>Promise 는 객체이다 </li>
-<li>new 키워드와 생성자를 필요로 한다</li>
-<li>결과 값으로 성공과 실패를 반환한다</li>
-<li>성공값은 resolve 로 반환되면 비동기 작업이 성공적일 경우에만 반환된다</li>
-<li>실패값은 reject 로 반환되며 작업이 실패하여 보통 오류값이 있을경우에 반환된다</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise1 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">  &#125;, <span class="number">300</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise1.<span class="title function_">then</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">  <span class="comment">// expected output: &quot;foo&quot;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(promise1);</span><br><span class="line"><span class="comment">// output: [object Promise]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a>Promise.all(iterable)</h3><p>한번에 많은 양의 비동기 처리를 담당할때나 여러 프로미스의 결과를 집계할 때 유용하게 사용가능하다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise1 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">const</span> promise2 = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">const</span> promise3 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">all</span>([promise1, promise2, promise3]).<span class="title function_">then</span>(<span class="function">(<span class="params">values</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(values);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// expected output: Array [3, 42, &quot;foo&quot;]</span></span><br></pre></td></tr></table></figure>
-<p>순회 가능한 객체(promise1,promise2,promise3)에 프로미스가 아닌 값이 들어있다면 무시하지만, 이행 시 결과 배열에는 포함합니다.</p>
-<h3 id="Promise-allSettled"><a href="#Promise-allSettled" class="headerlink" title="Promise.allSettled()"></a>Promise.allSettled()</h3><p>주어진 모든 프로미스가 실행되는 것은 Promise.all과 같지만<br>각 프로미스에 대한 결과값도 확인해준다.</p>
-<ol>
-<li>대기(pending): 이행하지도, 거부하지도 않은 초기 상태.</li>
-<li>이행(fulfilled): 연산이 성공적으로 완료됨.</li>
-<li>거부(rejected): 연산이 실패함.</li>
-</ol>
-<p>위의 두개의 all기능과 allSettled기능은 비동기데이터or이벤트를 한번에 실행할때 좋은 방식이라고 생각한다. 실전에 사용한다면 한번 더 여기에 추가할 예정이다</p>
 
       
     </div>
