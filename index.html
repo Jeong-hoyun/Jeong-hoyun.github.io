@@ -119,12 +119,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -157,6 +157,99 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/12/redux-thunk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/12/redux-thunk/" class="post-title-link" itemprop="url">redux (redux) 1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-12 00:46:00 / Modified: 01:22:23" itemprop="dateCreated datePublished" datetime="2022-08-12T00:46:00+09:00">2022-08-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/redux/" itemprop="url" rel="index"><span itemprop="name">redux</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/redux/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="redux의-중요성을-배웠다"><a href="#redux의-중요성을-배웠다" class="headerlink" title="redux의 중요성을 배웠다"></a>redux의 중요성을 배웠다</h2><p>결국 웹사이트 혹은 웹에서의 상태는 매우 중요하다. 현재 사용자가 어떤 component를 다루는 것에 따라 최상단의 상태정보가 필요할 수도 있고 반대도 가능하다. 하지만 그렇다고 해서 props로 모든 정보를 끌어오는 것은 유지 보수 관점에서 따지면 최악일수 밖에 없다. 예를 들어 form component 에서 받은 정보를 최상단 app컴포넌트에서 가장 밑 딴인 data component에서 추가적으로 상태를 추가했을때 어디서부터 어디까지 수정이 필요할지 파악하기가 매우 힘들것을 예상할 수 있다. </p>
+<p>그렇기에 최상단에서 필요한 정보만을 가져오고 또한 변경할 수 있는 수단이 현재 react에서 많이 사용하는 redux이다<br>강의에서 배운건 자바스크립트로도 쉽게 표현 가능하다. 김민태 강사님이 말해주는 방식이 매우 정리가 잘되서 여기도 올려서 한번 정리해보고자 한다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createStore</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> state;</span><br><span class="line">  <span class="keyword">let</span> handlers = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">send</span>(<span class="params">action</span>) &#123;</span><br><span class="line">    state = <span class="title function_">worker</span>(state, action);</span><br><span class="line">    handlers.<span class="title function_">forEach</span>(<span class="function"><span class="params">handler</span> =&gt;</span> <span class="title function_">handler</span>());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">subscribe</span>(<span class="params">handler</span>) &#123;</span><br><span class="line">    handlers.<span class="title function_">push</span>(handler);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">getState</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    send,</span><br><span class="line">    getState,</span><br><span class="line">    subscribe,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">worker</span>(<span class="params">state = &#123; count: <span class="number">0</span> &#125;, action</span>) &#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">  <span class="keyword">switch</span>(action.<span class="property">type</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;increase&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, <span class="attr">count</span>: state.<span class="property">count</span> + <span class="number">1</span> &#125;;</span><br><span class="line">    <span class="attr">default</span>: </span><br><span class="line">      <span class="keyword">return</span> &#123; ...state &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">createStore</span>(worker);</span><br><span class="line"></span><br><span class="line">store.<span class="title function_">subscribe</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(store.<span class="title function_">getState</span>());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">store.<span class="title function_">send</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;increase&#x27;</span> &#125;);</span><br><span class="line">store.<span class="title function_">send</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;increase&#x27;</span> &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol>
+<li>먼저 상태를 저장시켜야하기 때문에 함수 createStore를 작성해준다.</li>
+<li>함수 createStore를 통해 상태를 전달해야하기에 현재의 상태와 그 상태를 만들어주는 핸들러(함수)를 먼저 작성해본다</li>
+<li>함수를 저장하기 위해서는 함수를 구독하는 방식 [] 에 push를 해서 따로 받아 줄 수 있도록 정리해본다</li>
+<li>state를 어떤 방식으로 보낼 것인지는 프로그래머가 지정하기에 worker라는 함수로 임시지정하여 action.type에 따라서 상태값이 달라지게 설정한다. </li>
+<li>store를 만들었고 그 만든 store에 함수를 지정하였고 그 뒤 실행하면 상태의 변화없이 어느 곳에서든 사용가능한 방식이 가능해진다.</li>
+</ol>
+<p>이런 방식의 강의를 듣고 머리 속에 그림이 조금 그려지게 되었다. redux에 대해 미들웨어 같은 부분도 정리해볼 생각이다. </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -940,96 +1033,6 @@
 <p>HTTP 스테이터스 파악도 간단해서 실질적으로 접속 확인 다중체크 등에 매우 자주 써볼 생각이다</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">postData</span>(<span class="params">url = <span class="string">&#x27;&#x27;</span>, data = &#123;&#125;</span>) &#123;</span><br><span class="line">  <span class="comment">// 옵션 기본 값은 *로 강조</span></span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="comment">// *GET, POST, PUT, DELETE 등</span></span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;cors&#x27;</span>, <span class="comment">// no-cors, *cors, same-origin</span></span><br><span class="line">    <span class="attr">cache</span>: <span class="string">&#x27;no-cache&#x27;</span>, <span class="comment">// *default, no-cache, reload, force-cache, only-if-cached</span></span><br><span class="line">    <span class="attr">credentials</span>: <span class="string">&#x27;same-origin&#x27;</span>, <span class="comment">// include, *same-origin, omit</span></span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">      <span class="comment">// &#x27;Content-Type&#x27;: &#x27;application/x-www-form-urlencoded&#x27;,</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span>, <span class="comment">// manual, *follow, error</span></span><br><span class="line">    <span class="attr">referrerPolicy</span>: <span class="string">&#x27;no-referrer&#x27;</span>, <span class="comment">// no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url</span></span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data), <span class="comment">// body의 데이터 유형은 반드시 &quot;Content-Type&quot; 헤더와 일치해야 함</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> response.<span class="title function_">json</span>(); <span class="comment">// JSON 응답을 네이티브 JavaScript 객체로 파싱</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">postData</span>(<span class="string">&#x27;https://example.com/answer&#x27;</span>, &#123; <span class="attr">answer</span>: <span class="number">42</span> &#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data); <span class="comment">// JSON 데이터가 `data.json()` 호출에 의해 파싱됨</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>기본적인 URL쿼리를 통한 get 방식은 한계가 있기에 ajax와 마찬가지로 post 방식도 지원한다.<br>물론 POST방식을 테스트해보니 역시 CORS문제가 나와서 서버관련 문제라 예전에 해결해본 경험이 있으나<br>까먹었으니 다시한번 해결방법에 대해 정리를 해볼려고 한다</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/20/react-useEffect-hook/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/20/react-useEffect-hook/" class="post-title-link" itemprop="url">react useEffect(hook)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-20 20:18:00 / Modified: 21:47:48" itemprop="dateCreated datePublished" datetime="2022-07-20T20:18:00+09:00">2022-07-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="useEffect를-쓰는-이유1"><a href="#useEffect를-쓰는-이유1" class="headerlink" title="useEffect를 쓰는 이유1"></a>useEffect를 쓰는 이유1</h2><p>간략하게 설명할 방법은 react가 render를 할때<br>그 내부에 있는 모든 useState와 기능들이 같이 실행되기 때문에 필요할 경우에만 쓰기위해 필요한 함수를 따로 담아서 쓸수 있는 장점이있다.<br>약간 promise 비슷한거 같기도 한 느낌 <br><br> 🤔 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">()=&gt;</span><span class="title class_">OnlyOnce</span>,[])</span><br></pre></td></tr></table></figure>
-<p> 간략하게 이런식으로 쓰면 한번만 render할때 OnlyOnce라는 함수가 실행되고 실행이 되지 않는다</p>
-<h2 id="useEffect를-쓰는-이유2"><a href="#useEffect를-쓰는-이유2" class="headerlink" title="useEffect를 쓰는 이유2"></a>useEffect를 쓰는 이유2</h2><p>사실 두번째 이유가 가장 크다<br>보통 useState와 같이 쓰는데 어떤 이벤트가 발생하였을때 이벤트가 실행될때마다 다른 함수도 자동적으로 실행되는 경우가 많기에 제약을 따로 줄 필요가 있다. </p>
-<p>이럴때 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">()=&gt;</span> &#123;</span><br><span class="line"><span class="keyword">if</span>(keyword!==<span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;search&#x27;</span>,keyword)</span><br><span class="line">&#125;&#125;  ,[keyword])</span><br></pre></td></tr></table></figure>
-<p>keyword의 값이 변하지 않는다면 console.log(‘search’,keyword) 는 실행되지 않는다. 이와 같은 방식으로 검색앱 등을 만든다거나 어떤 이벤트를 잘 정렬하여서 순서를 만드는 것도 쉽게 가능하다고 생각한다.  
- </p>
 
       
     </div>
