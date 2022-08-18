@@ -20,27 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jeong-hoyun.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="현재 next.js로 앱 두개를 개발중이며 하나씩 오류를 수정중이며 어떤 오류가 있었는지 그리고 어느 부분에서 고생하였는지 한번씩 기록을 남기려고 한다. notion api 연동 포트폴리오 사이트https:&#x2F;&#x2F;github.com&#x2F;Jeong-hoyun&#x2F;portfolio-site 배운점 next js의 Image url 파싱할떄 초기 설정이 필요하다는 부분을">
+    <meta name="description" content="reduce아직 익숙치 않은 javascript 방식중에서 reduce는 아직 제대로 써보지않아서 연습중이다.연습한 내용을 한번 적어보면서 복습을 해보자 12345678910function solution(arr)&amp;#123;    var sum &#x3D; arr.reduce(function (prev, cur) &amp;#123;        return prev + c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Next 개발일지 1">
-<meta property="og:url" content="https://jeong-hoyun.github.io/2022/08/09/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-1/index.html">
+<meta property="og:title" content="reduce 를 공부해보자">
+<meta property="og:url" content="https://jeong-hoyun.github.io/2022/08/18/reduce-%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%B3%B4%EC%9E%90/index.html">
 <meta property="og:site_name" content="frontend 개발중">
-<meta property="og:description" content="현재 next.js로 앱 두개를 개발중이며 하나씩 오류를 수정중이며 어떤 오류가 있었는지 그리고 어느 부분에서 고생하였는지 한번씩 기록을 남기려고 한다. notion api 연동 포트폴리오 사이트https:&#x2F;&#x2F;github.com&#x2F;Jeong-hoyun&#x2F;portfolio-site 배운점 next js의 Image url 파싱할떄 초기 설정이 필요하다는 부분을">
+<meta property="og:description" content="reduce아직 익숙치 않은 javascript 방식중에서 reduce는 아직 제대로 써보지않아서 연습중이다.연습한 내용을 한번 적어보면서 복습을 해보자 12345678910function solution(arr)&amp;#123;    var sum &#x3D; arr.reduce(function (prev, cur) &amp;#123;        return prev + c">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-09T08:15:00.000Z">
-<meta property="article:modified_time" content="2022-08-09T08:49:55.496Z">
+<meta property="article:published_time" content="2022-08-18T14:34:00.000Z">
+<meta property="article:modified_time" content="2022-08-18T14:53:04.567Z">
 <meta property="article:author" content="jeong-hoyun">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jeong-hoyun.github.io/2022/08/09/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-1/">
+<link rel="canonical" href="https://jeong-hoyun.github.io/2022/08/18/reduce-%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%B3%B4%EC%9E%90/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/08/09/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-1/","path":"2022/08/09/Next-개발일지-1/","title":"Next 개발일지 1"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/08/18/reduce-%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%B3%B4%EC%9E%90/","path":"2022/08/18/reduce-를-공부해보자/","title":"reduce 를 공부해보자"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Next 개발일지 1 | frontend 개발중</title>
+<title>reduce 를 공부해보자 | frontend 개발중</title>
   
 
 
@@ -109,7 +109,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#notion-api-%EC%97%B0%EB%8F%99-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4-%EC%82%AC%EC%9D%B4%ED%8A%B8"><span class="nav-number">1.</span> <span class="nav-text">notion api 연동 포트폴리오 사이트</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EB%B0%B0%EC%9A%B4%EC%A0%90"><span class="nav-number">1.1.</span> <span class="nav-text">배운점</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%97%90%EB%9F%AC-%EC%82%AC%ED%95%AD"><span class="nav-number">1.2.</span> <span class="nav-text">에러 사항</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#reduce"><span class="nav-number">1.</span> <span class="nav-text">reduce</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -170,7 +170,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/09/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-1/">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/18/reduce-%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%B3%B4%EC%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -183,12 +183,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Next 개발일지 1 | frontend 개발중">
+      <meta itemprop="name" content="reduce 를 공부해보자 | frontend 개발중">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Next 개발일지 1
+          reduce 를 공부해보자
         </h1>
 
         <div class="post-meta-container">
@@ -200,20 +200,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-08-09 17:15:00 / Modified: 17:49:55" itemprop="dateCreated datePublished" datetime="2022-08-09T17:15:00+09:00">2022-08-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/react/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
+      <time title="Created: 2022-08-18 23:34:00 / Modified: 23:53:04" itemprop="dateCreated datePublished" datetime="2022-08-18T23:34:00+09:00">2022-08-18</time>
     </span>
 
   
@@ -226,18 +213,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>현재 next.js로 앱 두개를 개발중이며 하나씩 오류를 수정중이며 어떤 오류가 있었는지 그리고 어느 부분에서 고생하였는지 한번씩 기록을 남기려고 한다.</p>
-<h3 id="notion-api-연동-포트폴리오-사이트"><a href="#notion-api-연동-포트폴리오-사이트" class="headerlink" title="notion api 연동 포트폴리오 사이트"></a>notion api 연동 포트폴리오 사이트</h3><p><a target="_blank" rel="noopener" href="https://github.com/Jeong-hoyun/portfolio-site">https://github.com/Jeong-hoyun/portfolio-site</a></p>
-<h4 id="배운점"><a href="#배운점" class="headerlink" title="배운점"></a>배운점</h4><ol>
-<li>next js의 Image url 파싱할떄 초기 설정이 필요하다는 부분을 배웠다.<br>next.config 설정시에 url 의 내용을 파악하고 jpg인지 png인지 혹은 null 일때 처리는 어떻게 해야하는지에 대해서도 한번<br>깊게 생각하는 계기가 되었다.</li>
-<li>getServerSideProps와 getStaticProps 를 실제적으로 경험하여 SSR과 CSR 의 차이를 어느정도 알게 되었다.<br>getStaticProps는 최초 빌드 시에 딱 한 번만 호출된다는 점이 매우 중요한 차이를 만든다는 것을 알수 있게 되었다. 예를 들어 notion api 사용을 한다고 getStaticProps를 사용한다면 notion을 수정한다해도 getStaticProps를 쓴 페이지는 변함이 없다. 반대로 getServerSideProps는 실시간으로 렌더시에 데이터가 수정될 경우에 사전렌더링이 되기 때문에 promise 를 통한 비동기 방식으로 데이터를 받아온다면 실시간 변동도 바로 확인이 가능하다. 왠만하면 수정이 거의 없는 상품 설명서, 또는 제품 목록 등은 SEO를 생각하면 getServerSideProps가 좋지 않을까 생각해본다.<br>밑에와 같이 ({ params })과 같은 객체를 넘겨 API주소를 변동시켜서 데이터를 바꿀수도 있기에 다른 방식으로도 써볼 생각이다.</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// getStaticProps 페이지 안에서만 쓸수 있다. </span><br><span class="line">export async function getStaticProps(&#123; params &#125;) &#123;   </span><br><span class="line">    // API 호출</span><br><span class="line">    const response = await fetch(`https/example.com/posts/$&#123;params.id&#125;`); // </span><br><span class="line">    const post = await response.json();</span><br><span class="line"></span><br><span class="line">    return &#123;</span><br><span class="line">        props: &#123; post &#125;,  //  컴포넌트가 전달받을 props 객체</span><br><span class="line">        revalidate: false,  // 페이지의 Regeneration을 수행하기 위한 유예 기간</span><br><span class="line">        notFound: false  // 404 페이지 반환 여부 (fallback: false일 때는 불필요)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><p>아직 익숙치 않은 javascript 방식중에서 reduce는 아직 제대로 써보지않아서 연습중이다.<br>연습한 내용을 한번 적어보면서 복습을 해보자</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">solution</span>(<span class="params">arr</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> sum = arr.<span class="title function_">reduce</span>(<span class="keyword">function</span> (<span class="params">prev, cur</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> prev + cur;</span><br><span class="line">    &#125;,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">solution</span>([<span class="number">5</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="comment">// 최종 합 20 출력</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>prev는 누산기로서의 역할을 하며 그전값을 대신해주기도 한다.  cur은 현재 값이라서<br>실행 순서는 prev&#x3D;0 + cur&#x3D; 5 &#x3D;&gt; prev&#x3D;5 +cur &#x3D;3 &#x3D;&gt; prev&#x3D;8+cur&#x3D;7 &#x3D;&gt; prev&#x3D;15+cur&#x3D;2&#x3D;&gt; prev&#x3D;17+cur&#x3D;3<br>라는 실행을 한번에 실행하여 결과값을 제시해주는 것이 reduce이다. </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">&quot;경기도&quot;</span>, <span class="string">&quot;수원시&quot;</span>, <span class="string">&quot;팔달구&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> result = arr.<span class="title function_">reduceRight</span>(<span class="function">(<span class="params">acc, element</span>) =&gt;</span> acc + <span class="string">&quot; &quot;</span> + element);</span><br><span class="line"></span><br><span class="line"><span class="comment">/// reduceRight는 배열이나 object 의 오른쪽으로부터 시행되는 함수이다. </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-<h4 id="에러-사항"><a href="#에러-사항" class="headerlink" title="에러 사항"></a>에러 사항</h4><ol>
-<li>cannot find module ‘fs’ <br/><br>모듈 문제를 한번더 import 한 결과 이와 같은 결과가 나올수 있다는 것을 알았다.</li>
-</ol>
+<p>이와 같이 reduceRight라는 함수도 존재한다. </p>
+<p>구체적인 예시는 아래 링크로 공부하고 있다.</p>
+<p>[JS-📚-배열-고차함수-reduce]<br><a target="_blank" rel="noopener" href="https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EB%B0%B0%EC%97%B4-%EA%B3%A0%EC%B0%A8%ED%95%A8%EC%88%98-reduce">https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EB%B0%B0%EC%97%B4-%EA%B3%A0%EC%B0%A8%ED%95%A8%EC%88%98-reduce</a></p>
 
     </div>
 
@@ -251,14 +234,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/08/04/typescript-interface/" rel="prev" title="typescript interface">
-                  <i class="fa fa-chevron-left"></i> typescript interface
+                <a href="/2022/08/18/redex-thunk-3/" rel="prev" title="redux (thunk) 3">
+                  <i class="fa fa-chevron-left"></i> redux (thunk) 3
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/08/10/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%802/" rel="next" title="Next 개발일지 2">
-                  Next 개발일지 2 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
