@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jeong-hoyun.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="주말동안 밤새면서 만들던 작업 정리 mysql 과 phpmyadmin 설치를 통해 나만의 DB 만들기  ec2에 이것저것 설치하면서 과거 배웠던 php나 db커넥트 방식을 다시 써보게 되서 감회가 새롭다.자세한 설치 방식은 apt-get 형식으로 php-fpm 을 설치하였고 php-cil 그리고 phpmyadmin 설치 123$ sudo apt update">
+<meta property="og:type" content="article">
+<meta property="og:title" content="api 서버 만들기 1">
+<meta property="og:url" content="https://jeong-hoyun.github.io/2022/08/22/api-%EC%84%9C%EB%B2%84-%EB%A7%8C%EB%93%A4%EA%B8%B0/index.html">
+<meta property="og:site_name" content="frontend 개발중">
+<meta property="og:description" content="주말동안 밤새면서 만들던 작업 정리 mysql 과 phpmyadmin 설치를 통해 나만의 DB 만들기  ec2에 이것저것 설치하면서 과거 배웠던 php나 db커넥트 방식을 다시 써보게 되서 감회가 새롭다.자세한 설치 방식은 apt-get 형식으로 php-fpm 을 설치하였고 php-cil 그리고 phpmyadmin 설치 123$ sudo apt update">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://jeong-hoyun.github.io/images/pasted-9.png">
+<meta property="og:image" content="https://jeong-hoyun.github.io/images/pasted-8.png">
+<meta property="og:image" content="https://jeong-hoyun.github.io/images/pasted-7.png">
+<meta property="article:published_time" content="2022-08-22T05:37:00.000Z">
+<meta property="article:modified_time" content="2022-08-22T05:59:28.825Z">
+<meta property="article:author" content="jeong-hoyun">
+<meta property="article:tag" content="aws">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jeong-hoyun.github.io/images/pasted-9.png">
+
+
+<link rel="canonical" href="https://jeong-hoyun.github.io/2022/08/22/api-%EC%84%9C%EB%B2%84-%EB%A7%8C%EB%93%A4%EA%B8%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/08/22/api-%EC%84%9C%EB%B2%84-%EB%A7%8C%EB%93%A4%EA%B8%B0/","path":"2022/08/22/api-서버-만들기/","title":"api 서버 만들기 1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>api 서버 만들기 1 | frontend 개발중</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">frontend 개발중</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">front-end+maketing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A3%BC%EB%A7%90%EB%8F%99%EC%95%88-%EB%B0%A4%EC%83%88%EB%A9%B4%EC%84%9C-%EB%A7%8C%EB%93%A4%EB%8D%98-%EC%9E%91%EC%97%85-%EC%A0%95%EB%A6%AC"><span class="nav-number">1.</span> <span class="nav-text">주말동안 밤새면서 만들던 작업 정리</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B7%B8-%EC%99%B8-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EB%AC%B8%EC%A0%9C-%EC%83%9D%EA%B8%B4-%EA%B2%83-%EA%B3%B5%EC%9C%A0"><span class="nav-number">2.</span> <span class="nav-text">그 외 여러가지 문제 생긴 것 공유</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jeong-hoyun</p>
+  <div class="site-description" itemprop="description">과거 마케딩 경험도 가끔씩 올릴 예정입니다</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/22/api-%EC%84%9C%EB%B2%84-%EB%A7%8C%EB%93%A4%EA%B8%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="api 서버 만들기 1 | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          api 서버 만들기 1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-22 14:37:00 / Modified: 14:59:28" itemprop="dateCreated datePublished" datetime="2022-08-22T14:37:00+09:00">2022-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/backend/" itemprop="url" rel="index"><span itemprop="name">backend</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/backend/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="주말동안-밤새면서-만들던-작업-정리"><a href="#주말동안-밤새면서-만들던-작업-정리" class="headerlink" title="주말동안 밤새면서 만들던 작업 정리"></a>주말동안 밤새면서 만들던 작업 정리</h2><ol>
+<li>mysql 과 phpmyadmin 설치를 통해 나만의 DB 만들기</li>
+</ol>
+<p>ec2에 이것저것 설치하면서 과거 배웠던 php나 db커넥트 방식을 다시 써보게 되서 감회가 새롭다.<br>자세한 설치 방식은 apt-get 형식으로 php-fpm 을 설치하였고 php-cil 그리고 phpmyadmin 설치</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line">$ sudo apt install phpmyadmin</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>phpmyadmin<br>DB작성은 예전 많이 해서 문제는 없었는데  mysql 업데이트로 파티션 나누는 방식이 생겨 언제 한번 공부를 생각중이다. 지금은 할게 많아서…</li>
+</ol>
+<p><img src="/images/pasted-9.png" alt="upload successful"><br>primary key 설정과 auto increment 설정은 따로 지정하였다. 한국어로 쓸 예정이라 데이터 정렬은<br>utf8mb3 일반으로 설정하였다. </p>
+<ol start="3">
+<li>php 형식으로 GET,POST 받아보기 테스트<br>nginx를 사용하여 예전 사용했던 아파치 서버의 .htaccess 를 사용하지 못해 아직도 GET 방식만 성공할수 있었다. 다른 방식이 있나 언제 시간나면 다른 분들께 물어볼 예정</li>
+</ol>
+<p>GET 방식은 아래와 같은 방식으로 받아보았다.</p>
+<p><img src="/images/pasted-8.png" alt="upload successful"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Origin: *&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Headers: *&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Methods: *&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>Access-Control-Allow-Origin을 통해 CORS 문제를 방지하였고 sql문을 통해서 전체적인 내용이 나오도록 처리하였다. 혹시 id를 개별로 GET방식으로 쿼리를 날렸을때는 따로 볼수있도록 처리해보았다.<br>laravel 이 되었다면 이런 하나하나 짤 필요도 없을것은 엄청 고생해서 설정하게 되었다.</p>
+<ol start="4">
+<li>remote ssh 사용을 통해 좀더 원할하게 서버 접근가능하게 하기</li>
+</ol>
+<p><img src="/images/pasted-7.png" alt="upload successful"></p>
+<p>vscode 확장기능을 통해서 설치하였고 설정방식은 윈도우라면 ctrl+shift+p를 하고 remote ssh의 내용을 체크한뒤 비밀키 장소를 설정하고 도메인주소를 입력하면 성공적으로 동작할 것이다.</p>
+<ol start="5">
+<li>생각보다 너무 오래 걸려서 좀 더 쉽게 api 서버를 만들 방법을 찾는중</li>
+</ol>
+<p>생각보다 aws 람다식과 게이트웨이 방식으로 쉽게 만들수 있다는 이야기가 있어서 현재 공부중인데 이것보다 엄청 간단한것같다. 다 만들어진다면 한번 블로그에 정리할 예정이다.</p>
+<h2 id="그-외-여러가지-문제-생긴-것-공유"><a href="#그-외-여러가지-문제-생긴-것-공유" class="headerlink" title="그 외 여러가지 문제 생긴 것 공유"></a>그 외 여러가지 문제 생긴 것 공유</h2><ol>
+<li>npm은 여전히 동작하지 않는다.<br>아직도 이유를 모르겠다</li>
+<li>curl 도 동작하지 않는다<br>이것도 이유를 모르겠다. apt-get이 된다는건 보안상 문제는 아닌 것으로 생각되는데..</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/aws/" rel="tag"># aws</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/21/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%84%9C%EB%B2%84-1/" rel="prev" title="클라우드 서버 1 (npm 설치에러)">
+                  <i class="fa fa-chevron-left"></i> 클라우드 서버 1 (npm 설치에러)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jeong-hoyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
