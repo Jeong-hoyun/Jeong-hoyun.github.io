@@ -119,12 +119,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -157,6 +157,98 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/10/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%802/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/10/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%802/" class="post-title-link" itemprop="url">Next 개발일지 2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-10 20:51:00 / Modified: 21:04:02" itemprop="dateCreated datePublished" datetime="2022-08-10T20:51:00+09:00">2022-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="env를-github에-넣어버렸다"><a href="#env를-github에-넣어버렸다" class="headerlink" title=".env를 github에 넣어버렸다!"></a>.env를 github에 넣어버렸다!</h3><p>.gitignore 파일에 분명히 .env가 있는것을 확인하고 push 했다고 생각했지만 … 확인해보니 github에 기록이 남아있게되었다! 이유를 찾아보니 파일을 생성하기 전 이미 git에 .next를 올렸기 때문에 적용이 되지 않는 것이라고.. 아마 env 를 무시하였으니 그 이유가 아니었을까 다시 한번 더 조심하자고 느꼈다.</p>
+<p>[참고사이트1]<a target="_blank" rel="noopener" href="https://letsgojieun.tistory.com/113">https://letsgojieun.tistory.com/113</a></p>
+<p>그래서 지금 개발하는 사이트는 api 키와 시크릿 키를 쓰기에 일단 github를 private 처리한뒤에 여러가지 해결 방식을 찾아보았다. </p>
+<h3 id="이력-제거-방식-1-필터링-방식"><a href="#이력-제거-방식-1-필터링-방식" class="headerlink" title="이력 제거 방식 1 필터링 방식"></a>이력 제거 방식 1 필터링 방식</h3><p>.env파일을 잘못 올린경우 새로운 commit을 올리더라도 commit 히스토리에 남는 것을 지우기 위해서는 전체 히스토리에서 필터링해 제거할 수 있다는 것을 찾게 되었다. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git filter-branch -f --index-filter &#x27;git rm --cached --ignore-unmatch .env&#x27; --prune-empty -- --all</span><br></pre></td></tr></table></figure>
+<p>[깃 공식문서 ]<a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-filter-branch">https://git-scm.com/docs/git-filter-branch</a></p>
+<p>주의) 로컬 저장소에서도 필터링 되기 때문에 삭제된다.</p>
+<p>하지만 벌써 vercel에 공식 배포도 완료해 버려서 수정하려니 계속 컴플릭트가 나서 reset이나 다른 방식으로 해결 방식을 찾고 있다. 엄청 삽질중…</p>
+<h3 id="다른-필터링-방식"><a href="#다른-필터링-방식" class="headerlink" title="다른 필터링 방식"></a>다른 필터링 방식</h3><p>[참고 사이트 2]<a target="_blank" rel="noopener" href="https://daily-dev-tips.com/posts/removing-a-env-file-from-git-history/">https://daily-dev-tips.com/posts/removing-a-env-file-from-git-history/</a></p>
+<p>이 사이트에서는 좀 더 체계적으로 commit 이력을 삭제하는 방법을 알려주었지만 역시 컴플릭트 문제를 먼저 해결해야만 하는 것일까. 일단 deploy 상태인 것을 정지 시키고 새롭게 짜는게 더 빠를지도 모르겠다.. 원본 파일은 있으니 그게 더 빠를 것같기도 하지만 혹시 실제로 이렇게 될 경우를 아주 조금이지만 대비하는 측면에서 조금만 더 살펴보도록 하자</p>
+<h1 id="반드시-commit-시-파일-이름-다시-체크할-것"><a href="#반드시-commit-시-파일-이름-다시-체크할-것" class="headerlink" title="반드시 commit 시 파일 이름 다시 체크할 것!"></a>반드시 commit 시 파일 이름 다시 체크할 것!</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -938,104 +1030,6 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">()=&gt;</span> &#123;</span><br><span class="line"><span class="keyword">if</span>(keyword!==<span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;search&#x27;</span>,keyword)</span><br><span class="line">&#125;&#125;  ,[keyword])</span><br></pre></td></tr></table></figure>
 <p>keyword의 값이 변하지 않는다면 console.log(‘search’,keyword) 는 실행되지 않는다. 이와 같은 방식으로 검색앱 등을 만든다거나 어떤 이벤트를 잘 정렬하여서 순서를 만드는 것도 쉽게 가능하다고 생각한다.  
  </p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/19/react-life-Cycle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/19/react-life-Cycle/" class="post-title-link" itemprop="url">react life Cycle</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-07-19 17:49:00" itemprop="dateCreated datePublished" datetime="2022-07-19T17:49:00+09:00">2022-07-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-20 20:18:20" itemprop="dateModified" datetime="2022-07-20T20:18:20+09:00">2022-07-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="react-life-cycle"><a href="#react-life-cycle" class="headerlink" title="react life cycle"></a>react life cycle</h2><p>get 또는 post로 데이터를 주고 받는 테스트를 하는 도중 너무 많은 에러가 있어<br>다시 한번 라이프 사이클을 정리하고 비동기를 어디에서 써야할지 변수 선언은 어디서 할지 한번 더 확인하는 겸 글을 정리해보려고 한다. 특히 hook의 useEffect가 이해가 아직 잘 안되서..<br>💀</p>
-<p>-<br>리액트가 웹 상에 렌더링 되기 위해선 render() 메서드가 실행되어야한다<br>배운바에 의하면 리엑트는 순서가 정의되어있고 그 순서가 맞지 않으면 실행되지 않는다</p>
-<ol>
-<li>Mounting 단계<br><br>컴포넌트가 시작되면(생성자) 우선 context, defaultProps와 state를 저장하는 단계입니다.</li>
-<li>componentWillMount <br><br>DOM접근 금지 단계 render하기 전이라서 여러가지 변수 설정이나 변환하기 어려운 단계이다</li>
-<li>componentDidMount <br><br> DOM에 접근할 수 있습니다. 그래서 여기에서는 주로 AJAX 요청을 하거나, setTimeout, setInterval같은 비동기 처리가 가능해진다.</li>
-</ol>
-<p>- </p>
-<p>리액트의 컴포넌트는 생성된 후 Mount 상태에서 한 번 render() 메서드를 실행하고, 후에는 Update 상태에 진입해 shouldComponentUpdate의 값이 true일 때만 render() 메서드를 실행한다</p>
-<p>아직 단계를 배우는 중이라서 모르는 부분이나 괜찮은 예시가 있다면 추가할 예정이다</p>
 
       
     </div>

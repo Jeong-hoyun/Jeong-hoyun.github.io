@@ -20,27 +20,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jeong-hoyun.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="method chaining메서드가 객체를 반환하게 되면 메서드의 반환 값인 객체를 통해 또 다른 함수를 호출할 수 있다. 이러한 프로그래밍 패턴을 메서드 체이닝(Method Chaining)이라 부른다. 간단한 배열으로 실행하면서 연습중이다 123456789101112131415let n&#x3D;&amp;#x27;53745&amp;#x27;const result&#x3D; String">
+    <meta name="description" content="간략개요리액트를 이용한 뉴욕타임즈 기사 검색 프로젝트입니다. 자신이 보고자 하는 뉴욕타임즈기사를 검색하는 것을 목적으로 하고 있습니다. 📚 메인 기술    이틀동안의 진척 상황전체적으로 팀원분들께서 잘 해주고 계신다.검색 input 기능과 딜레이 기능 그리고 뷰관련 기능을 각각 담당하게 되었고 서로 의견교환과 git을 통한 관리도 서로 배우면서 공부가 되">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javascript method chaining">
-<meta property="og:url" content="https://jeong-hoyun.github.io/2022/07/29/javascript-method-chaining/index.html">
+<meta property="og:title" content="미니 프로젝트(react)">
+<meta property="og:url" content="https://jeong-hoyun.github.io/2022/08/24/%EB%AF%B8%EB%8B%88-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/index.html">
 <meta property="og:site_name" content="frontend 개발중">
-<meta property="og:description" content="method chaining메서드가 객체를 반환하게 되면 메서드의 반환 값인 객체를 통해 또 다른 함수를 호출할 수 있다. 이러한 프로그래밍 패턴을 메서드 체이닝(Method Chaining)이라 부른다. 간단한 배열으로 실행하면서 연습중이다 123456789101112131415let n&#x3D;&amp;#x27;53745&amp;#x27;const result&#x3D; String">
+<meta property="og:description" content="간략개요리액트를 이용한 뉴욕타임즈 기사 검색 프로젝트입니다. 자신이 보고자 하는 뉴욕타임즈기사를 검색하는 것을 목적으로 하고 있습니다. 📚 메인 기술    이틀동안의 진척 상황전체적으로 팀원분들께서 잘 해주고 계신다.검색 input 기능과 딜레이 기능 그리고 뷰관련 기능을 각각 담당하게 되었고 서로 의견교환과 git을 통한 관리도 서로 배우면서 공부가 되">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-07-29T03:55:00.000Z">
-<meta property="article:modified_time" content="2022-07-29T04:00:38.027Z">
+<meta property="og:image" content="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<meta property="og:image" content="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<meta property="og:image" content="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+<meta property="article:published_time" content="2022-08-24T13:35:00.000Z">
+<meta property="article:modified_time" content="2022-08-26T11:28:55.068Z">
 <meta property="article:author" content="jeong-hoyun">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 
 
-<link rel="canonical" href="https://jeong-hoyun.github.io/2022/07/29/javascript-method-chaining/">
+<link rel="canonical" href="https://jeong-hoyun.github.io/2022/08/24/%EB%AF%B8%EB%8B%88-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/07/29/javascript-method-chaining/","path":"2022/07/29/javascript-method-chaining/","title":"javascript method chaining"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/08/24/%EB%AF%B8%EB%8B%88-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/","path":"2022/08/24/미니-프로젝트/","title":"미니 프로젝트(react)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>javascript method chaining | frontend 개발중</title>
+<title>미니 프로젝트(react) | frontend 개발중</title>
   
 
 
@@ -109,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#method-chaining"><span class="nav-number">1.</span> <span class="nav-text">method chaining</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B0%84%EB%9E%B5%EA%B0%9C%EC%9A%94"><span class="nav-number">1.</span> <span class="nav-text">간략개요</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%9A-%EB%A9%94%EC%9D%B8-%EA%B8%B0%EC%88%A0"><span class="nav-number">1.1.</span> <span class="nav-text">📚 메인 기술</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9D%B4%ED%8B%80%EB%8F%99%EC%95%88%EC%9D%98-%EC%A7%84%EC%B2%99-%EC%83%81%ED%99%A9"><span class="nav-number">1.2.</span> <span class="nav-text">이틀동안의 진척 상황</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B8%B0%ED%83%80-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD"><span class="nav-number">1.3.</span> <span class="nav-text">기타 요구사항</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -170,7 +174,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/29/javascript-method-chaining/">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/24/%EB%AF%B8%EB%8B%88-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -183,12 +187,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="javascript method chaining | frontend 개발중">
+      <meta itemprop="name" content="미니 프로젝트(react) | frontend 개발중">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          javascript method chaining
+          미니 프로젝트(react)
         </h1>
 
         <div class="post-meta-container">
@@ -198,9 +202,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-07-29 12:55:00 / Modified: 13:00:38" itemprop="dateCreated datePublished" datetime="2022-07-29T12:55:00+09:00">2022-07-29</time>
+      <time title="Created: 2022-08-24 22:35:00" itemprop="dateCreated datePublished" datetime="2022-08-24T22:35:00+09:00">2022-08-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-08-26 20:28:55" itemprop="dateModified" datetime="2022-08-26T20:28:55+09:00">2022-08-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -208,7 +218,11 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+          <a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/react/project/" itemprop="url" rel="index"><span itemprop="name">project</span></a>
         </span>
     </span>
 
@@ -222,10 +236,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="method-chaining"><a href="#method-chaining" class="headerlink" title="method chaining"></a>method chaining</h2><p>메서드가 객체를 반환하게 되면 메서드의 반환 값인 객체를 통해 또 다른 함수를 호출할 수 있다. 이러한 프로그래밍 패턴을 메서드 체이닝(Method Chaining)이라 부른다.</p>
-<p>간단한 배열으로 실행하면서 연습중이다</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n=<span class="string">&#x27;53745&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result= <span class="title class_">String</span>(n)</span><br><span class="line">.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">.<span class="title function_">sort</span>()</span><br><span class="line">.<span class="title function_">reverse</span>()</span><br><span class="line">.<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br><span class="line"><span class="comment">//순서 </span></span><br><span class="line"><span class="comment">//split = 5 3 7 4 5 </span></span><br><span class="line"><span class="comment">//sort= 3 4 5 5 7   </span></span><br><span class="line"><span class="comment">//reverse=7 5 5 4 3  </span></span><br><span class="line"><span class="comment">//join =75545</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>코드가 엄청간략해지고 편한 측면이 있어보인다. </p>
+        <h2 id="간략개요"><a href="#간략개요" class="headerlink" title="간략개요"></a>간략개요</h2><p>리액트를 이용한 뉴욕타임즈 기사 검색 프로젝트입니다. 자신이 보고자 하는 뉴욕타임즈기사를 검색하는 것을 목적으로 하고 있습니다.</p>
+<h3 id="📚-메인-기술"><a href="#📚-메인-기술" class="headerlink" title="📚 메인 기술"></a>📚 메인 기술</h3><img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+
+<h3 id="이틀동안의-진척-상황"><a href="#이틀동안의-진척-상황" class="headerlink" title="이틀동안의 진척 상황"></a>이틀동안의 진척 상황</h3><p>전체적으로 팀원분들께서 잘 해주고 계신다.<br>검색 input 기능과 딜레이 기능 그리고 뷰관련 기능을 각각 담당하게 되었고 서로 의견교환과 git을 통한 관리도 서로 배우면서 공부가 되고 있다. </p>
+<h3 id="기타-요구사항"><a href="#기타-요구사항" class="headerlink" title="기타 요구사항"></a>기타 요구사항</h3><ul>
+<li><input disabled="" type="checkbox"> create-react-app 사용</li>
+<li><input disabled="" type="checkbox"> react-router-dom 사용</li>
+<li><input disabled="" type="checkbox"> redux 사용</li>
+<li><input disabled="" type="checkbox"> 스타일링 및 방식은 자유 (css, styled-components 등)</li>
+<li><input disabled="" type="checkbox"> nyt api token은 본인이 가입하여 발급하기</li>
+</ul>
 
     </div>
 
@@ -239,14 +262,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/07/28/CORS/" rel="prev" title="CORS">
-                  <i class="fa fa-chevron-left"></i> CORS
+                <a href="/2022/08/23/%ED%9A%8C%EC%9E%A5-%EC%84%A0%EA%B1%B0-coding-test/" rel="prev" title="회장 선거(coding test)">
+                  <i class="fa fa-chevron-left"></i> 회장 선거(coding test)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/07/29/javascript-Optional-chaining/" rel="next" title="javascript Optional chaining">
-                  javascript Optional chaining <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
