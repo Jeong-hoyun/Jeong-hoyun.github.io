@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -157,6 +157,186 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/28/javascript-fetch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/28/javascript-fetch/" class="post-title-link" itemprop="url">javascript fetch</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-28 18:56:00 / Modified: 19:24:10" itemprop="dateCreated datePublished" datetime="2022-07-28T18:56:00+09:00">2022-07-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>fetch 를 통해서 URL의 데이터를 받는 방식은 여러 방식이 존재할 수 있다. </p>
+<p>기본적인 방식으로는 fetch 란 것이 promise 가 내재되어있기때문에<br>then을 통해서 비동기를 순차적으로 실행할수 있고</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="variable constant_">URL</span>)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> res.<span class="title function_">json</span>())   <span class="comment">//1번 순서</span></span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> &#123;  <span class="variable language_">console</span>.<span class="title function_">log</span>()   &#125;   <span class="comment">//2번 순서 res.json </span></span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;  data.<span class="property">response</span>.<span class="property">docs</span>  &#125;   <span class="comment">//2번 순서</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p>물론 asnyc 방식으로 순서를 지정하는 것도 가능하다</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fetchFunc</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(url);</span><br><span class="line">  data = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">  data2 = <span class="keyword">await</span> data.<span class="property">response</span>.<span class="property">docs</span>;    </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>아직까지 몇번 써보지 않아서 그렇지만 ajax보다 매우 편리하다!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(url);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (response.<span class="property">ok</span>) &#123; <span class="comment">// HTTP 상태 코드가 200~299일 경우</span></span><br><span class="line">  <span class="comment">// 응답 몬문을 받습니다(관련 메서드는 아래에서 설명).</span></span><br><span class="line">  <span class="keyword">let</span> json = <span class="keyword">await</span> response.<span class="title function_">json</span>();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">&quot;HTTP-Error: &quot;</span> + response.<span class="property">status</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HTTP 스테이터스 파악도 간단해서 실질적으로 접속 확인 다중체크 등에 매우 자주 써볼 생각이다</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">postData</span>(<span class="params">url = <span class="string">&#x27;&#x27;</span>, data = &#123;&#125;</span>) &#123;</span><br><span class="line">  <span class="comment">// 옵션 기본 값은 *로 강조</span></span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="comment">// *GET, POST, PUT, DELETE 등</span></span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;cors&#x27;</span>, <span class="comment">// no-cors, *cors, same-origin</span></span><br><span class="line">    <span class="attr">cache</span>: <span class="string">&#x27;no-cache&#x27;</span>, <span class="comment">// *default, no-cache, reload, force-cache, only-if-cached</span></span><br><span class="line">    <span class="attr">credentials</span>: <span class="string">&#x27;same-origin&#x27;</span>, <span class="comment">// include, *same-origin, omit</span></span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">      <span class="comment">// &#x27;Content-Type&#x27;: &#x27;application/x-www-form-urlencoded&#x27;,</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span>, <span class="comment">// manual, *follow, error</span></span><br><span class="line">    <span class="attr">referrerPolicy</span>: <span class="string">&#x27;no-referrer&#x27;</span>, <span class="comment">// no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url</span></span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data), <span class="comment">// body의 데이터 유형은 반드시 &quot;Content-Type&quot; 헤더와 일치해야 함</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> response.<span class="title function_">json</span>(); <span class="comment">// JSON 응답을 네이티브 JavaScript 객체로 파싱</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">postData</span>(<span class="string">&#x27;https://example.com/answer&#x27;</span>, &#123; <span class="attr">answer</span>: <span class="number">42</span> &#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data); <span class="comment">// JSON 데이터가 `data.json()` 호출에 의해 파싱됨</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>기본적인 URL쿼리를 통한 get 방식은 한계가 있기에 ajax와 마찬가지로 post 방식도 지원한다.<br>물론 POST방식을 테스트해보니 역시 CORS문제가 나와서 서버관련 문제라 예전에 해결해본 경험이 있으나<br>까먹었으니 다시한번 해결방법에 대해 정리를 해볼려고 한다</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/20/react-useEffect-hook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/20/react-useEffect-hook/" class="post-title-link" itemprop="url">react useEffect(hook)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-20 20:18:00 / Modified: 21:47:48" itemprop="dateCreated datePublished" datetime="2022-07-20T20:18:00+09:00">2022-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="useEffect를-쓰는-이유1"><a href="#useEffect를-쓰는-이유1" class="headerlink" title="useEffect를 쓰는 이유1"></a>useEffect를 쓰는 이유1</h2><p>간략하게 설명할 방법은 react가 render를 할때<br>그 내부에 있는 모든 useState와 기능들이 같이 실행되기 때문에 필요할 경우에만 쓰기위해 필요한 함수를 따로 담아서 쓸수 있는 장점이있다.<br>약간 promise 비슷한거 같기도 한 느낌 <br><br> 🤔 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">()=&gt;</span><span class="title class_">OnlyOnce</span>,[])</span><br></pre></td></tr></table></figure>
+<p> 간략하게 이런식으로 쓰면 한번만 render할때 OnlyOnce라는 함수가 실행되고 실행이 되지 않는다</p>
+<h2 id="useEffect를-쓰는-이유2"><a href="#useEffect를-쓰는-이유2" class="headerlink" title="useEffect를 쓰는 이유2"></a>useEffect를 쓰는 이유2</h2><p>사실 두번째 이유가 가장 크다<br>보통 useState와 같이 쓰는데 어떤 이벤트가 발생하였을때 이벤트가 실행될때마다 다른 함수도 자동적으로 실행되는 경우가 많기에 제약을 따로 줄 필요가 있다. </p>
+<p>이럴때 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">()=&gt;</span> &#123;</span><br><span class="line"><span class="keyword">if</span>(keyword!==<span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;search&#x27;</span>,keyword)</span><br><span class="line">&#125;&#125;  ,[keyword])</span><br></pre></td></tr></table></figure>
+<p>keyword의 값이 변하지 않는다면 console.log(‘search’,keyword) 는 실행되지 않는다. 이와 같은 방식으로 검색앱 등을 만든다거나 어떤 이벤트를 잘 정렬하여서 순서를 만드는 것도 쉽게 가능하다고 생각한다.  
+ </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -954,173 +1134,6 @@
 <h3 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: git pull [Repository Link]  </span><br><span class="line"></span><br><span class="line">이 명령은 원격 서버의 변경 내용을 작업 디렉터리로 가져오고 병합합니다.</span><br></pre></td></tr></table></figure>
 
 <h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Usage: git stash save  </span><br><span class="line"></span><br><span class="line">이 명령은 수정된 추적된 모든 파일을 임시로 저장합니다.</span><br><span class="line"></span><br><span class="line">Usage: git stash pop  </span><br><span class="line"></span><br><span class="line">이 명령은 가장 최근에 저장된 파일을 복원합니다.</span><br><span class="line"></span><br><span class="line">Usage: git stash list  </span><br><span class="line"></span><br><span class="line">이 명령은 모든 저장된 변경 리스트를 나열합니다.</span><br><span class="line"></span><br><span class="line">Usage: git stash drop  </span><br><span class="line"></span><br><span class="line">이 명령은 가장 최근에 저장된 변경 내용을 삭제합니다.</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/04/scss-for/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/04/scss-for/" class="post-title-link" itemprop="url">scss for</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-04 15:03:00 / Modified: 15:07:46" itemprop="dateCreated datePublished" datetime="2022-07-04T15:03:00+09:00">2022-07-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/html/" itemprop="url" rel="index"><span itemprop="name">html</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="scss-for-반복문"><a href="#scss-for-반복문" class="headerlink" title="scss for(반복문)"></a>scss for(반복문)</h2><p>css 도 javascript 와 같이 for문을 이용하여 웹상에서 이용가능하다.</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@for</span> <span class="variable">$i</span> from <span class="number">1</span> through <span class="number">10</span>&#123;</span><br><span class="line">  <span class="selector-class">.box</span><span class="selector-pseudo">:nth-child</span>(#&#123;$i&#125;)&#123;</span><br><span class="line">  <span class="comment">//변수를 감싸줄때는 #&#123;&#125;으로 감싸주고 표현할 필요가 있다</span></span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100px</span>-#&#123;<span class="variable">$i</span>&#125;px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>위와 같은 함수는 여러번 반복되지만 조금씩 다른 표현이 필요할 때 사용할 수 있다.<br>조금씩 작아지거나 순차적으로 커지는 css 표현에서도 사용가능하며 짝수 홀수에 따라 나눠질때도 표현이<br>가능하다고 생각한다</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">///위의 for문 실행시에 표시되는 css</span><br><span class="line">.box:nth-child(1) &#123;</span><br><span class="line">  width: 100px- 1px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(2) &#123;</span><br><span class="line">  width: 100px- 2px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(3) &#123;</span><br><span class="line">  width: 100px- 3px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(4) &#123;</span><br><span class="line">  width: 100px- 4px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(5) &#123;</span><br><span class="line">  width: 100px- 5px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(6) &#123;</span><br><span class="line">  width: 100px- 6px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(7) &#123;</span><br><span class="line">  width: 100px- 7px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(8) &#123;</span><br><span class="line">  width: 100px- 8px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(9) &#123;</span><br><span class="line">  width: 100px- 9px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:nth-child(10) &#123;</span><br><span class="line">  width: 100px- 10px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/04/scss-mixins/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/04/scss-mixins/" class="post-title-link" itemprop="url">scss mixins</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-04 14:21:00 / Modified: 14:47:55" itemprop="dateCreated datePublished" datetime="2022-07-04T14:21:00+09:00">2022-07-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/html/" itemprop="url" rel="index"><span itemprop="name">html</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="SCSS-MIXINS-재활용"><a href="#SCSS-MIXINS-재활용" class="headerlink" title="SCSS MIXINS 재활용"></a>SCSS MIXINS 재활용</h2><p>css를 변수화 혹은 반복할수 있는 점이 scss의 최고의 장점이라고 생각합니다<br>혹은 함수화를 통해서 무궁무진하게 재활용하여 편리하게 웹사이트를 구축하는데 도움이 되기에 정리를 해보고 있습니다</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> center </span><br><span class="line">&#123;</span><br><span class="line">   <span class="attribute">display</span>: flex;</span><br><span class="line">   <span class="attribute">justify-content</span>: center;</span><br><span class="line">   <span class="attribute">align-items</span>:center;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 자주 쓰는 css 형식을 변수화</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@mixin</span> box(<span class="variable">$size</span>:<span class="number">100px</span>)&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="variable">$size</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="variable">$size</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: tomato;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 자주 쓰는 css 형식을 함수화(변수 2개도 사용가능)</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="keyword">@include</span> center;</span><br><span class="line">    <span class="selector-class">.item</span>&#123;</span><br><span class="line">        <span class="keyword">@include</span> box(<span class="number">100px</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위의 코드를 풀면 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  align-items: center;</span><br><span class="line">&#125;</span><br><span class="line">.container .item &#123;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  background-color: tomato;</span><br><span class="line">&#125;</span><br><span class="line">//사이즈가 지정되지 않았기때문에 기본사이즈인 100px가 들어가게 된다.</span><br></pre></td></tr></table></figure>
-
-<p>코드수가 많아질수록 위와 같은 변수화와 함수화는 코드 압축에 큰 도움이 된다고 할수 있습니다.<br>사이트 프로젝트 만들때 자주 쓸 예정입니다</p>
-
       
     </div>
 

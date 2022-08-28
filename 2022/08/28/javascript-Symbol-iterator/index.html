@@ -20,29 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jeong-hoyun.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content=".env를 github에 넣어버렸다!.gitignore 파일에 분명히 .env가 있는것을 확인하고 push 했다고 생각했지만 … 확인해보니 github에 기록이 남아있게되었다! 이유를 찾아보니 파일을 생성하기 전 이미 git에 .next를 올렸기 때문에 적용이 되지 않는 것이라고.. 아마 env 를 무시하였으니 그 이유가 아니었을까 다시 한번 더 조심하자고">
+    <meta name="description" content="Symbol.iterator공부할때 간간히 까먹기는 했는데 전체적으로 한번 정리가 필요한 시점이라 정리를 해보려고 한다.  현재 Symbol.iterator는 어떻게 사용되는가?기존에 사용하던 for문에서 우리는 명령에 가까운 코딩을 해왔었다.그렇다면 현재 ES6에서의 javascript 는 어떻게 변하였을까 123456789101112&#x2F;&#x2F;과거 ES5var">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Next 개발일지 2">
-<meta property="og:url" content="https://jeong-hoyun.github.io/2022/08/10/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%802/index.html">
+<meta property="og:title" content="javascript Symbol.iterator 1">
+<meta property="og:url" content="https://jeong-hoyun.github.io/2022/08/28/javascript-Symbol-iterator/index.html">
 <meta property="og:site_name" content="frontend 개발중">
-<meta property="og:description" content=".env를 github에 넣어버렸다!.gitignore 파일에 분명히 .env가 있는것을 확인하고 push 했다고 생각했지만 … 확인해보니 github에 기록이 남아있게되었다! 이유를 찾아보니 파일을 생성하기 전 이미 git에 .next를 올렸기 때문에 적용이 되지 않는 것이라고.. 아마 env 를 무시하였으니 그 이유가 아니었을까 다시 한번 더 조심하자고">
+<meta property="og:description" content="Symbol.iterator공부할때 간간히 까먹기는 했는데 전체적으로 한번 정리가 필요한 시점이라 정리를 해보려고 한다.  현재 Symbol.iterator는 어떻게 사용되는가?기존에 사용하던 for문에서 우리는 명령에 가까운 코딩을 해왔었다.그렇다면 현재 ES6에서의 javascript 는 어떻게 변하였을까 123456789101112&#x2F;&#x2F;과거 ES5var">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-10T11:51:00.000Z">
-<meta property="article:modified_time" content="2022-08-10T12:04:02.945Z">
+<meta property="article:published_time" content="2022-08-28T13:51:00.000Z">
+<meta property="article:modified_time" content="2022-08-28T14:23:28.339Z">
 <meta property="article:author" content="jeong-hoyun">
-<meta property="article:tag" content="git">
-<meta property="article:tag" content="env">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jeong-hoyun.github.io/2022/08/10/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%802/">
+<link rel="canonical" href="https://jeong-hoyun.github.io/2022/08/28/javascript-Symbol-iterator/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/08/10/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%802/","path":"2022/08/10/Next-개발일지2/","title":"Next 개발일지 2"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/08/28/javascript-Symbol-iterator/","path":"2022/08/28/javascript-Symbol-iterator/","title":"javascript Symbol.iterator 1"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Next 개발일지 2 | frontend 개발중</title>
+<title>javascript Symbol.iterator 1 | frontend 개발중</title>
   
 
 
@@ -111,7 +109,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#env%EB%A5%BC-github%EC%97%90-%EB%84%A3%EC%96%B4%EB%B2%84%EB%A0%B8%EB%8B%A4"><span class="nav-number">1.</span> <span class="nav-text">.env를 github에 넣어버렸다!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9D%B4%EB%A0%A5-%EC%A0%9C%EA%B1%B0-%EB%B0%A9%EC%8B%9D-1-%ED%95%84%ED%84%B0%EB%A7%81-%EB%B0%A9%EC%8B%9D"><span class="nav-number">2.</span> <span class="nav-text">이력 제거 방식 1 필터링 방식</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%8B%A4%EB%A5%B8-%ED%95%84%ED%84%B0%EB%A7%81-%EB%B0%A9%EC%8B%9D"><span class="nav-number">3.</span> <span class="nav-text">다른 필터링 방식</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%B0%98%EB%93%9C%EC%8B%9C-commit-%EC%8B%9C-%ED%8C%8C%EC%9D%BC-%EC%9D%B4%EB%A6%84-%EB%8B%A4%EC%8B%9C-%EC%B2%B4%ED%81%AC%ED%95%A0-%EA%B2%83"><span class="nav-number"></span> <span class="nav-text">반드시 commit 시 파일 이름 다시 체크할 것!</span></a></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol-iterator"><span class="nav-number">1.</span> <span class="nav-text">Symbol.iterator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%ED%98%84%EC%9E%AC-Symbol-iterator%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%82%AC%EC%9A%A9%EB%90%98%EB%8A%94%EA%B0%80"><span class="nav-number">1.1.</span> <span class="nav-text">현재 Symbol.iterator는 어떻게 사용되는가?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B6%94%EC%83%81%ED%99%94%EB%A5%BC-%ED%86%B5%ED%95%9C-%EB%B0%98%EB%B3%B5"><span class="nav-number">2.</span> <span class="nav-text">추상화를 통한 반복</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,7 +170,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/10/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%802/">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/28/javascript-Symbol-iterator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,12 +183,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Next 개발일지 2 | frontend 개발중">
+      <meta itemprop="name" content="javascript Symbol.iterator 1 | frontend 개발중">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Next 개발일지 2
+          javascript Symbol.iterator 1
         </h1>
 
         <div class="post-meta-container">
@@ -202,7 +200,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-08-10 20:51:00 / Modified: 21:04:02" itemprop="dateCreated datePublished" datetime="2022-08-10T20:51:00+09:00">2022-08-10</time>
+      <time title="Created: 2022-08-28 22:51:00 / Modified: 23:23:28" itemprop="dateCreated datePublished" datetime="2022-08-28T22:51:00+09:00">2022-08-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -211,10 +209,6 @@
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
         </span>
     </span>
 
@@ -228,17 +222,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="env를-github에-넣어버렸다"><a href="#env를-github에-넣어버렸다" class="headerlink" title=".env를 github에 넣어버렸다!"></a>.env를 github에 넣어버렸다!</h3><p>.gitignore 파일에 분명히 .env가 있는것을 확인하고 push 했다고 생각했지만 … 확인해보니 github에 기록이 남아있게되었다! 이유를 찾아보니 파일을 생성하기 전 이미 git에 .next를 올렸기 때문에 적용이 되지 않는 것이라고.. 아마 env 를 무시하였으니 그 이유가 아니었을까 다시 한번 더 조심하자고 느꼈다.</p>
-<p>[참고사이트1]<a target="_blank" rel="noopener" href="https://letsgojieun.tistory.com/113">https://letsgojieun.tistory.com/113</a></p>
-<p>그래서 지금 개발하는 사이트는 api 키와 시크릿 키를 쓰기에 일단 github를 private 처리한뒤에 여러가지 해결 방식을 찾아보았다. </p>
-<h3 id="이력-제거-방식-1-필터링-방식"><a href="#이력-제거-방식-1-필터링-방식" class="headerlink" title="이력 제거 방식 1 필터링 방식"></a>이력 제거 방식 1 필터링 방식</h3><p>.env파일을 잘못 올린경우 새로운 commit을 올리더라도 commit 히스토리에 남는 것을 지우기 위해서는 전체 히스토리에서 필터링해 제거할 수 있다는 것을 찾게 되었다. </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git filter-branch -f --index-filter &#x27;git rm --cached --ignore-unmatch .env&#x27; --prune-empty -- --all</span><br></pre></td></tr></table></figure>
-<p>[깃 공식문서 ]<a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-filter-branch">https://git-scm.com/docs/git-filter-branch</a></p>
-<p>주의) 로컬 저장소에서도 필터링 되기 때문에 삭제된다.</p>
-<p>하지만 벌써 vercel에 공식 배포도 완료해 버려서 수정하려니 계속 컴플릭트가 나서 reset이나 다른 방식으로 해결 방식을 찾고 있다. 엄청 삽질중…</p>
-<h3 id="다른-필터링-방식"><a href="#다른-필터링-방식" class="headerlink" title="다른 필터링 방식"></a>다른 필터링 방식</h3><p>[참고 사이트 2]<a target="_blank" rel="noopener" href="https://daily-dev-tips.com/posts/removing-a-env-file-from-git-history/">https://daily-dev-tips.com/posts/removing-a-env-file-from-git-history/</a></p>
-<p>이 사이트에서는 좀 더 체계적으로 commit 이력을 삭제하는 방법을 알려주었지만 역시 컴플릭트 문제를 먼저 해결해야만 하는 것일까. 일단 deploy 상태인 것을 정지 시키고 새롭게 짜는게 더 빠를지도 모르겠다.. 원본 파일은 있으니 그게 더 빠를 것같기도 하지만 혹시 실제로 이렇게 될 경우를 아주 조금이지만 대비하는 측면에서 조금만 더 살펴보도록 하자</p>
-<h1 id="반드시-commit-시-파일-이름-다시-체크할-것"><a href="#반드시-commit-시-파일-이름-다시-체크할-것" class="headerlink" title="반드시 commit 시 파일 이름 다시 체크할 것!"></a>반드시 commit 시 파일 이름 다시 체크할 것!</h1>
+        <h2 id="Symbol-iterator"><a href="#Symbol-iterator" class="headerlink" title="Symbol.iterator"></a>Symbol.iterator</h2><p>공부할때 간간히 까먹기는 했는데 전체적으로 한번 정리가 필요한 시점이라 정리를 해보려고 한다. </p>
+<h3 id="현재-Symbol-iterator는-어떻게-사용되는가"><a href="#현재-Symbol-iterator는-어떻게-사용되는가" class="headerlink" title="현재 Symbol.iterator는 어떻게 사용되는가?"></a>현재 Symbol.iterator는 어떻게 사용되는가?</h3><p>기존에 사용하던 for문에서 우리는 명령에 가까운 코딩을 해왔었다.<br>그렇다면 현재 ES6에서의 javascript 는 어떻게 변하였을까</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//과거 ES5</span></span><br><span class="line"><span class="keyword">var</span> list =[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;list.<span class="property">length</span>;i++)&#123;</span><br><span class="line">list[i]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//현재 ES6</span></span><br><span class="line"><span class="keyword">let</span> list =[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> x <span class="keyword">of</span> list)&#123;</span><br><span class="line"> x </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>이와 같은 변화의 기본 이유가 어떤 것이고 왜 이렇게 된 것인지<br>유인동 강사님의 강의를 듣고 매우 많이 정리가 되었다.<br>바로 위에서 말한 Symbol.iterator 라는 방식을 javascript는 채택 하고 쓰고 있던 것이었다.</p>
+<ul>
+<li>Symbol.iterator라는 Symbol<br>“심볼(symbol)”은 데이터 형식과 심볼 데이터 형식의 인스턴스를 생성하는 클래스와 유사한(class-like) “Symbol”이다라는 것이 현재 javascript 공식 문서의 설명이다.</li>
+</ul>
+<p>우리는 한걸음 더 나아갔다. Symbol을 통해서 그렇다면 class와 비슷하게 추상화를 할 것이다라는 것을 추론해볼수 있다.</p>
+<ul>
+<li>iterator라는 반복기<br>영어 자체의 의미가  반복기(iterator)라는 뜻이다. 그렇다면<br>좀 더 명확해졌다.</li>
+</ul>
+<h2 id="추상화를-통한-반복"><a href="#추상화를-통한-반복" class="headerlink" title="추상화를 통한 반복"></a>추상화를 통한 반복</h2><p>Symbol.iterator는 결국 추상화를 위한 반복이다<br>약간의 예시를 보자</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]=<span class="literal">null</span></span><br><span class="line"><span class="comment">// 배열의 Symbol.iterator 값을 초기화해보자</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> x <span class="keyword">of</span> arr) <span class="variable language_">console</span>.<span class="title function_">log</span>(x)</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>답은 어떻게 되었을까?<br>역시 아무런 답이 나오지 않는다. TypeError arr is not iterable<br>of 의 순회는 과거의 방식과 달라진 것을 명확하게 알수 있었다.</p>
+
     </div>
 
     
@@ -246,22 +244,18 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/git/" rel="tag"># git</a>
-              <a href="/tags/env/" rel="tag"># env</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/08/09/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-1/" rel="prev" title="Next 개발일지 1">
-                  <i class="fa fa-chevron-left"></i> Next 개발일지 1
+                <a href="/2022/08/24/%EB%AF%B8%EB%8B%88-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/" rel="prev" title="미니 프로젝트(react)">
+                  <i class="fa fa-chevron-left"></i> 미니 프로젝트(react)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/08/12/redux-thunk/" rel="next" title="redux (redux) 1">
-                  redux (redux) 1 <i class="fa fa-chevron-right"></i>
+                <a href="/2022/08/28/javascript-Symbol-iterator-2/" rel="next" title="javascript Symbol.iterator 2">
+                  javascript Symbol.iterator 2 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

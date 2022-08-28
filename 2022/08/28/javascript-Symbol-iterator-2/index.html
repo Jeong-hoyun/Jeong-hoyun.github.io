@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jeong-hoyun.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Symbol.iterator 의 의미이전 내용 참조  이전 내용에서 javascript의 for of는 과거의 방식과는 다른 방식으로 사용되고 있다는 것까지 알게되었다. 그렇다면 이 Symbol.iterator 다른 예시와 구조를 보면서 만든 사람들의 사고를 떠올려보자 먼저 내부 구조를 살펴보자아까전에 array에 Symbol.iterator가 있는 것을">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript Symbol.iterator 2">
+<meta property="og:url" content="https://jeong-hoyun.github.io/2022/08/28/javascript-Symbol-iterator-2/index.html">
+<meta property="og:site_name" content="frontend 개발중">
+<meta property="og:description" content="Symbol.iterator 의 의미이전 내용 참조  이전 내용에서 javascript의 for of는 과거의 방식과는 다른 방식으로 사용되고 있다는 것까지 알게되었다. 그렇다면 이 Symbol.iterator 다른 예시와 구조를 보면서 만든 사람들의 사고를 떠올려보자 먼저 내부 구조를 살펴보자아까전에 array에 Symbol.iterator가 있는 것을">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-28T14:23:00.000Z">
+<meta property="article:modified_time" content="2022-08-28T14:56:27.039Z">
+<meta property="article:author" content="jeong-hoyun">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jeong-hoyun.github.io/2022/08/28/javascript-Symbol-iterator-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://jeong-hoyun.github.io/2022/08/28/javascript-Symbol-iterator-2/","path":"2022/08/28/javascript-Symbol-iterator-2/","title":"javascript Symbol.iterator 2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>javascript Symbol.iterator 2 | frontend 개발중</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">frontend 개발중</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">front-end+maketing</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol-iterator-%EC%9D%98-%EC%9D%98%EB%AF%B8"><span class="nav-number">1.</span> <span class="nav-text">Symbol.iterator 의 의미</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%A8%BC%EC%A0%80-%EB%82%B4%EB%B6%80-%EA%B5%AC%EC%A1%B0%EB%A5%BC-%EC%82%B4%ED%8E%B4%EB%B3%B4%EC%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">먼저 내부 구조를 살펴보자</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jeong-hoyun</p>
+  <div class="site-description" itemprop="description">과거 마케딩 경험도 가끔씩 올릴 예정입니다</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/28/javascript-Symbol-iterator-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="javascript Symbol.iterator 2 | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javascript Symbol.iterator 2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-28 23:23:00 / Modified: 23:56:27" itemprop="dateCreated datePublished" datetime="2022-08-28T23:23:00+09:00">2022-08-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Symbol-iterator-의-의미"><a href="#Symbol-iterator-의-의미" class="headerlink" title="Symbol.iterator 의 의미"></a>Symbol.iterator 의 의미</h2><p><a href="/2022/08/28/javascript-Symbol-iterator/">이전 내용 참조 </a></p>
+<p>이전 내용에서 javascript의 for of는 과거의 방식과는 다른 방식으로 사용되고 있다는 것까지 알게되었다.</p>
+<p>그렇다면 이 Symbol.iterator 다른 예시와 구조를 보면서 만든 사람들의 사고를 떠올려보자</p>
+<h3 id="먼저-내부-구조를-살펴보자"><a href="#먼저-내부-구조를-살펴보자" class="headerlink" title="먼저 내부 구조를 살펴보자"></a>먼저 내부 구조를 살펴보자</h3><p>아까전에 array에 Symbol.iterator가 있는 것을 알게 되었다.<br>그럼 그 Symbol.iterator의 내부구조를 console.log로 확인해보자</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let list=[1,2,3,4]</span><br><span class="line">const a=list[Symbol.iterator]</span><br><span class="line">console.log(a)</span><br><span class="line">// 결과값 ƒ values() &#123; [native code] &#125;</span><br><span class="line">````</span><br><span class="line">배열의 Symbol.iterator를 가져오면 그값은 함수가 되는 것을 알게 되었다 그렇다면 함수를 실행해보자 </span><br></pre></td></tr></table></figure>
+<p>const a&#x3D;list<a href="">Symbol.iterator</a><br>&#x2F;&#x2F; 결과값  Array Iterator {}</p>
+<pre><code>list의 Symbol.iterator라는 것을 실행시키니 Array lterator가 등장한다. 그리고 그 안에는 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Array Iterator &#123;&#125;</span><br><span class="line">[[Prototype]]: Array Iterator</span><br><span class="line">next: ƒ next()</span><br><span class="line">Symbol(Symbol.toStringTag): &quot;Array Iterator&quot;</span><br><span class="line">[[Prototype]]: Object</span><br><span class="line">Symbol(Symbol.iterator): ƒ [Symbol.iterator]()</span><br><span class="line">[[Prototype]]: Object</span><br></pre></td></tr></table></figure>
+next라는 함수와 prototype값이 존재한다. 
+
+## next라는 함수
+
+next와 순회는 매우 적절한 매치가 아닐까 한다.그렇다면 다시한번더 next를 실행해보자
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let list=[1,2,3,4]</span><br><span class="line">const a=list[Symbol.iterator]().next()</span><br><span class="line">&#123;value: 1, done: false&#125;</span><br></pre></td></tr></table></figure>
+value 값은 매우 익숙한 값이 나왔다. 이방식이 현재의 ES6 순회의 근간이자 하나의 추상화 방식이다라는 것을 알게되었다.
+그렇다면 done은 무엇일까
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let list=[1,2,3,4]</span><br><span class="line">let a=list[Symbol.iterator]()</span><br><span class="line">undefined</span><br><span class="line">a.next()</span><br><span class="line">&#123;value: 1, done: false&#125;</span><br><span class="line">a.next()</span><br><span class="line">&#123;value: 2, done: false&#125;</span><br><span class="line">a.next()</span><br><span class="line">&#123;value: 3, done: false&#125;</span><br><span class="line">a.next()</span><br><span class="line">&#123;value: 4, done: false&#125;</span><br><span class="line">a.next()</span><br><span class="line">&#123;value: undefined, done: true&#125;</span><br></pre></td></tr></table></figure>
+next를 계속 실행하면 계속 value는 순회하고 그 값이 없으면 done은 ture가 되는 방식이라는 것을 알수 있다. 
+
+## 또다른 예시
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const set=new Set([1,2,3])</span><br><span class="line">for(const a of set) console.log(a)</span><br><span class="line">//값이 나타난다는 것은 Set 인스턴스에도 Symbol.iterator가 존재한다는 뜻이다</span><br><span class="line"></span><br><span class="line">const map=new Map([[&#x27;a&#x27;,1],[&#x27;b&#x27;,2],&#x27;c&#x27;,2])</span><br><span class="line">for(const a of set) console.log(a)</span><br><span class="line">//값이 나타난다는 것은 Map 인스턴스에도 Symbol.iterator가 존재한다는 뜻이다</span><br></pre></td></tr></table></figure>
+
+매우 직관적이고 현재의 javascript의 비밀을 알게 된 것 같아서 매우 즐겁다. 
+
+이번주는 이 방식을 통해서 좀 더 많은 사용예시를 써볼까한다.
+
+
+
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/08/28/javascript-Symbol-iterator/" rel="prev" title="javascript Symbol.iterator 1">
+                  <i class="fa fa-chevron-left"></i> javascript Symbol.iterator 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jeong-hoyun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
