@@ -119,12 +119,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -157,6 +157,102 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/18/redex-thunk-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/18/redex-thunk-3/" class="post-title-link" itemprop="url">redux (thunk) 3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-08-18 23:14:00" itemprop="dateCreated datePublished" datetime="2022-08-18T23:14:00+09:00">2022-08-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-08-19 15:10:29" itemprop="dateModified" datetime="2022-08-19T15:10:29+09:00">2022-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>먼저 thunk란, 특정 작업을 나중에 하도록 미루기 위해서 함수형태로 감싼것을 칭합니다.<br>그것이 바로 미들웨어를 통하기때문이 아닐까 생각해본다</p>
+<h2 id="왜-redux-thunk-를-쓸까"><a href="#왜-redux-thunk-를-쓸까" class="headerlink" title="왜 redux-thunk 를 쓸까"></a>왜 redux-thunk 를 쓸까</h2><p>redux의 기본 골격은 보면 순수함수로 이루어진 action.type으로 스위치문으로 판별뒤 값을 리턴하는 방식으로 진행됩니다. 그렇기에 어떤 액션을 통해 dispatch 함수를 실행시킬 경우 결과는 항상 return 값으로만 남기 때문에 비동기를 실행을 시켜버리는 것과 값을 가져오는 것은 큰 차이가 있기에 기본적으로 불가능하다.<br>그렇기에 아래와 같은 미들웨어를 만들어주고 그 뒤에 typeof action&#x3D;&#x3D;&#x3D; ‘function’ 이라는 구문을 추가해 함수를 파악하고 그 자체를 실행시켜주는 방식으로 하는 것이 필요해져서<br>store.dispatch를 이용하는 것이라고 할 수 있다. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const createThunkMiddleware=extraArgument=&gt;next=&gt;action =&gt;&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>아래의 함수는 결국 위의 함수 방식과 다르지 않기에 실행 순서도 좀 더 명확하게 파악이 가능하다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createThunkMiddleware</span>(<span class="params">extraArgument</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">&#123; dispatch, getState &#125;</span>) =&gt;</span> <span class="function"><span class="params">next</span> =&gt;</span> <span class="function"><span class="params">action</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> action === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">action</span>(dispatch, getState, extraArgument);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 이부분이 thunk의 핵심</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">next</span>(action);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> thunk = <span class="title function_">createThunkMiddleware</span>();</span><br><span class="line">thunk.<span class="property">withExtraArgument</span> = createThunkMiddleware;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> thunk;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="npm-i-redux-thunk"><a href="#npm-i-redux-thunk" class="headerlink" title="npm i redux-thunk"></a>npm i redux-thunk</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const store = createStore(modules, applyMiddleware(logger, ReduxThunk))</span><br></pre></td></tr></table></figure>
+<p>위의 작은 방식으로도 현재는 아주 깔끔하게 provider에 store를 이용하고 비동기 처리도 dispatch 가능하다. 물론 react-redux 의 connect와 같이 쓰는 방식이 가장 유용하다고 생각한다.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -966,88 +1062,6 @@
 <p> <a target="_blank" rel="noopener" href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Optional_chaining">Optional chaining</a><br>  위의 함수가 옵셔널체이닝의 기본적인 방식이라고 공식에서 소개하고 있다. 객체에first라는 프로퍼티를 생성하였을때 nestedProp라는 변수에서  obj.first?.second는 결국 temp가 null이나 undefined일 경우 undefined를 반환한다는 뜻이다. 정확하게 변수의 타입을 지정해줘서 TypeError를 회피하는 방식이다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//현재 에러때문에 옵셔널체이닝 사용한 예시</span></span><br><span class="line">    .<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> &#123;      </span><br><span class="line">    <span class="comment">// fetch 나 axios와 같은 방식으로 데이터를 받아왔을 경우</span></span><br><span class="line">      <span class="keyword">const</span> <span class="title class_">Array</span>= data.<span class="property">response</span>?.<span class="property">docs</span>;</span><br><span class="line">      <span class="comment">//((data.response === null || data.response === undefined)? undefined : data.response.docs</span></span><br><span class="line">     </span><br></pre></td></tr></table></figure>
 <p>  위와 같은 방식으로 시도중이다</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/29/javascript-method-chaining/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/29/javascript-method-chaining/" class="post-title-link" itemprop="url">javascript method chaining</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-07-29 12:55:00 / Modified: 13:00:38" itemprop="dateCreated datePublished" datetime="2022-07-29T12:55:00+09:00">2022-07-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="method-chaining"><a href="#method-chaining" class="headerlink" title="method chaining"></a>method chaining</h2><p>메서드가 객체를 반환하게 되면 메서드의 반환 값인 객체를 통해 또 다른 함수를 호출할 수 있다. 이러한 프로그래밍 패턴을 메서드 체이닝(Method Chaining)이라 부른다.</p>
-<p>간단한 배열으로 실행하면서 연습중이다</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> n=<span class="string">&#x27;53745&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> result= <span class="title class_">String</span>(n)</span><br><span class="line">.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">.<span class="title function_">sort</span>()</span><br><span class="line">.<span class="title function_">reverse</span>()</span><br><span class="line">.<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br><span class="line"><span class="comment">//순서 </span></span><br><span class="line"><span class="comment">//split = 5 3 7 4 5 </span></span><br><span class="line"><span class="comment">//sort= 3 4 5 5 7   </span></span><br><span class="line"><span class="comment">//reverse=7 5 5 4 3  </span></span><br><span class="line"><span class="comment">//join =75545</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>코드가 엄청간략해지고 편한 측면이 있어보인다. </p>
 
       
     </div>
