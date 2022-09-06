@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -157,6 +157,84 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/28/CORS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/28/CORS/" class="post-title-link" itemprop="url">CORS</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-28 19:25:00 / Modified: 19:49:42" itemprop="dateCreated datePublished" datetime="2022-07-28T19:25:00+09:00">2022-07-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>CORS는 Cross Origin Resource Sharing의 약자로 도메인 및 포트가 다른 서버로 클라이언트가 요청했을 때 브라우저가 보안상의 이유로 대상의 아이피를 차단하는 문제이다  </p>
+<p>이번에 문제가 된 뉴욕타임즈 api 사용을 한 경우에 발생하여 이번에는 get 방식으로 api 검색사이트를 만들었지만 보안상의 이유와 관리측면에서 post 가 확실히 좋은 방식인 것은 분명하다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="variable constant_">URL</span>,</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&quot;POST&quot;</span>,</span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">      <span class="string">&quot;fq&quot;</span>: <span class="string">&quot;romney&quot;</span>,</span><br><span class="line">      <span class="string">&quot;facet&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">&quot;begin_date&quot;</span>: <span class="number">20220101</span>,</span><br><span class="line">      <span class="string">&quot;end_date&quot;</span>: <span class="number">20220725</span></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// URL(api)에 전달가능한 쿼리를 안보이게 전달</span></span><br><span class="line">   &#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">response</span>) =&gt;</span> response.<span class="title function_">json</span>())</span><br><span class="line">   .<span class="title function_">then</span>(<span class="function">(<span class="params">json</span>)=&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">const</span> <span class="title class_">Array</span>= json.<span class="property">response</span> </span><br><span class="line">     <span class="keyword">const</span> len=docsArray.<span class="property">length</span></span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="title class_">Array</span>;i++)&#123;</span><br><span class="line">       <span class="keyword">const</span> myP=<span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">       myP.<span class="property">innerText</span>=docsArray[i]</span><br><span class="line">       <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">append</span>(<span class="title class_">Array</span>[i].<span class="property">data</span>)     </span><br><span class="line">   &#125;&#125;)</span><br><span class="line">   .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>)=&gt;</span><span class="variable language_">console</span>.<span class="title function_">log</span>(error))</span><br></pre></td></tr></table></figure>
+<p>위와 같은 fetch 방식으로 보내서 해결해보려고 했지만 서버자체의 접근문제라 문제 해결 방식을<br>찾는데 시간이 조금 필요할것 같다.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Origin: *&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>서버별로 해결방식은 여러방식이 있었는데 그 전 직장에서 해결했던 방식은 PHP 서버에서의 해결 방식이었다.Access-Control-Allow-Origin: <code>*</code>을 입력해서 모든 도메인을 허용하는 방법이고<br> <code>*</code> 대신에 특정 url만 허용할 수도 있다.<br> 밑의 내용은 GET, POST, PUT, DELETE, OPTIONS을 허용한다는 의미이다.</p>
+<p>노드 방식의 해결 방식도 있었다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&#x27;cors&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> domains = [<span class="string">&#x27;http://localhost:3000&#x27;</span>];</span><br><span class="line"><span class="comment">//현재 도메인 지정가능</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> corsOptions = &#123;</span><br><span class="line">  <span class="attr">origin</span>: <span class="keyword">function</span>(<span class="params">origin, callback</span>)&#123;</span><br><span class="line">  	<span class="keyword">const</span> isTrue = domains.<span class="title function_">indexOf</span>(origin) !== -<span class="number">1</span>;</span><br><span class="line">    <span class="title function_">callback</span>(<span class="literal">null</span>, isTrue);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">credentials</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>(corsOptions));</span><br><span class="line"><span class="comment">//앱에서 사용하여 해결</span></span><br></pre></td></tr></table></figure>
+<p>해결방식을 한번 실행한뒤에 다시한번 내용을 추가 수정할 예정이다</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1009,131 +1087,6 @@
 <p>긴급 상황이 발생할 경우 main branch에 바로 출시할 수 있도록 작업하는 branch 입니다</p>
 </blockquote>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/07/git-commands/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/07/git-commands/" class="post-title-link" itemprop="url">git commands</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-07-07 13:29:00" itemprop="dateCreated datePublished" datetime="2022-07-07T13:29:00+09:00">2022-07-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-19 17:27:03" itemprop="dateModified" datetime="2022-07-19T17:27:03+09:00">2022-07-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>전체적으로 필요할 때마다 보기위해 커멘드를 정리해보았다. 깃 커멘드가 추가되는 것도 포함해서 깃 관련 정보를 계속 업데이트 할 예정이다. </p>
-<ul>
-<li>별도 사양 git add . 과 git reset은 되도록 사용하지 말것 </li>
-<li>개별 파일 add 에 익숙해질 것 </li>
-<li>reset 말고 git revert 로 되돌리는 것도 커밋을 통해 확인하고 되돌리자</li>
-</ul>
-<h2 id="git-commands"><a href="#git-commands" class="headerlink" title="git commands"></a>git commands</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config</span><br><span class="line">사용예시 : git config –global user.name “[name]”  </span><br><span class="line"></span><br><span class="line">Usage: git config –global user.email “[email address]”  </span><br></pre></td></tr></table></figure>
-<p>이 명령은 커밋에 사용할 작성자 이름과 전자 메일 주소를 각각 설정합니다.<br>git 초기 설정에 사용합니다</p>
-<h4 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Usage: git init [repository name]</span><br></pre></td></tr></table></figure>
-<p>이 명령은 새 리포지토리를 시작하는 데 사용됩니다.</p>
-<h4 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Usage: git clone [url]  </span><br></pre></td></tr></table></figure>
-<p>이 명령은 기존 URL에서 리포지토리를 가져오는 데 사용됩니다.</p>
-<h4 id="git-add"><a href="#git-add" class="headerlink" title="git add"></a>git add</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Usage: git add [file]  </span><br><span class="line"></span><br><span class="line">이 명령은 준비 영역(staging area)에 파일을 추가합니다.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Usage: git add *  </span><br><span class="line"></span><br><span class="line">이 명령은 준비 영역(staging area)에 하나 이상을 추가합니다.</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="git-commit"><a href="#git-commit" class="headerlink" title="git commit"></a>git commit</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Usage: git commit -m “[ Type in the commit message]”  </span><br><span class="line"></span><br><span class="line">이 명령은 파일을 버전 기록에 영구적으로 기록하거나 스냅샷합니다.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Usage: git commit -a  </span><br><span class="line"></span><br><span class="line">이 명령은 git add 명령으로 추가한 모든 파일을 커밋하고 이후 변경된 파일도 커밋합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a>git diff</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Usage: git diff  </span><br><span class="line"></span><br><span class="line">이 명령은 아직 준비되지 않은 파일 차이를 표시합니다.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Usage: git diff –staged </span><br><span class="line"></span><br><span class="line">이 명령은 준비 영역에 있는 파일과 존재하는 최신 버전의 차이를 표시합니다.</span><br><span class="line"></span><br><span class="line">Usage: git diff [first branch] [second branch]  </span><br><span class="line"></span><br><span class="line">이 명령은 언급된 두 분기(branch) 간의 차이를 표시합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-reset"><a href="#git-reset" class="headerlink" title="git reset"></a>git reset</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Usage: git reset [file]  </span><br><span class="line"></span><br><span class="line">이 명령은 파일을 스테이징하지만 파일 내용은 보존합니다.</span><br><span class="line"></span><br><span class="line">Usage: git reset [commit]  </span><br><span class="line"></span><br><span class="line">이 명령은 지정된 커밋 후 모든 커밋을 취소하고 변경 내용을 로컬로 보존합니다.</span><br><span class="line"></span><br><span class="line">Usage: git reset –hard [commit]  </span><br><span class="line"></span><br><span class="line">이 명령은 모든 기록을 삭제하고 지정된 커밋으로 돌아갑니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: git status  </span><br><span class="line"></span><br><span class="line">이 명령은 커밋해야 하는 모든 파일을 나열합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-rm"><a href="#git-rm" class="headerlink" title="git rm"></a>git rm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: git rm [file]  </span><br><span class="line"></span><br><span class="line">이 명령은 작업 디렉토리에서 파일을 삭제하고 삭제를 준비합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Usage: git log  </span><br><span class="line"></span><br><span class="line">이 명령은 현재 분기의 버전 기록을 나열하는 데 사용됩니다.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Usage: git log –follow[file]  </span><br><span class="line"></span><br><span class="line">이 명령은 개별 파일 이름 변경을 포함하여 파일의 버전 기록을 나열합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-show"><a href="#git-show" class="headerlink" title="git show"></a>git show</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: git show [commit]  </span><br><span class="line"></span><br><span class="line">이 명령은 지정된 커밋의 메타데이터 및 내용 변경을 표시합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-tag"><a href="#git-tag" class="headerlink" title="git tag"></a>git tag</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: git tag [commitID]  </span><br><span class="line"></span><br><span class="line">이 명령은 지정된 커밋에 태그를 지정하는 데 사용됩니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Usage: git branch  </span><br><span class="line"></span><br><span class="line">이 명령은 현재 리포지토리의 모든 로컬 분기를 나열합니다.</span><br><span class="line"></span><br><span class="line">Usage: git branch [branch name]  </span><br><span class="line"></span><br><span class="line">이 명령은 새 분기를 만듭니다.</span><br><span class="line"></span><br><span class="line">Usage: git branch -d [branch name]  </span><br><span class="line"></span><br><span class="line">이 명령은 피쳐 분기를 삭제합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a>git checkout</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Usage: git checkout [branch name]  </span><br><span class="line"></span><br><span class="line">이 명령은 한 분기(branch)에서 다른 분기로 전환하는 데 사용됩니다.</span><br><span class="line"></span><br><span class="line">Usage: git checkout -b [branch name]  </span><br><span class="line"></span><br><span class="line">이 명령은 새 분기를 만들고 분기로 전환합니다.</span><br></pre></td></tr></table></figure>
-<h3 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a>git merge</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: git merge [branch name]  </span><br><span class="line"></span><br><span class="line">이 명령은 지정된 분기의 기록을 현재 분기에 병합합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: git remote add [variable name] [Remote Server Link]  </span><br><span class="line"></span><br><span class="line">이 명령은 로컬 리포지토리를 원격 서버에 연결하는 데 사용됩니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Usage: git push [variable name] master  </span><br><span class="line"></span><br><span class="line">이 명령은 마스터 분기의 커밋된 변경 내용을 원격 리포지토리로 보냅니다.</span><br><span class="line"></span><br><span class="line">Usage: git push [variable name] [branch]  </span><br><span class="line"></span><br><span class="line">이 명령은 원격 리포지토리로 분기 커밋을 보냅니다.</span><br><span class="line"></span><br><span class="line">Usage: git push –all [variable name]  </span><br><span class="line"></span><br><span class="line">이 명령은 모든 분기를 원격 리포지토리로 푸시합니다.</span><br><span class="line"></span><br><span class="line">Usage: git push [variable name] :[branch name]  </span><br><span class="line"></span><br><span class="line">이 명령은 원격 저장소의 분기를 삭제합니다.</span><br><span class="line"></span><br><span class="line">Usage: git push -u [variable name] [branch]  </span><br><span class="line"></span><br><span class="line">이 명령은 원격 리포지토리에 새로운 분기를 만들고 커밋된 변경 내용을 원격 리포지토리에 보냅니다</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: git pull [Repository Link]  </span><br><span class="line"></span><br><span class="line">이 명령은 원격 서버의 변경 내용을 작업 디렉터리로 가져오고 병합합니다.</span><br></pre></td></tr></table></figure>
-
-<h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Usage: git stash save  </span><br><span class="line"></span><br><span class="line">이 명령은 수정된 추적된 모든 파일을 임시로 저장합니다.</span><br><span class="line"></span><br><span class="line">Usage: git stash pop  </span><br><span class="line"></span><br><span class="line">이 명령은 가장 최근에 저장된 파일을 복원합니다.</span><br><span class="line"></span><br><span class="line">Usage: git stash list  </span><br><span class="line"></span><br><span class="line">이 명령은 모든 저장된 변경 리스트를 나열합니다.</span><br><span class="line"></span><br><span class="line">Usage: git stash drop  </span><br><span class="line"></span><br><span class="line">이 명령은 가장 최근에 저장된 변경 내용을 삭제합니다.</span><br></pre></td></tr></table></figure>
       
     </div>
 
