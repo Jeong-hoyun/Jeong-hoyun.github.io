@@ -119,12 +119,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
@@ -157,6 +157,194 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/09/14/typescript-interface-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/14/typescript-interface-2/" class="post-title-link" itemprop="url">typescript interface 2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-09-14 16:24:09 / Modified: 16:48:42" itemprop="dateCreated datePublished" datetime="2022-09-14T16:24:09+09:00">2022-09-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="interface-정리-2"><a href="#interface-정리-2" class="headerlink" title="interface 정리 2"></a>interface 정리 2</h2><p>생각보다 interface의 기능이 조금 길어 두개로 나누어보았다. 그 전 내용은 링크 참조<br><a href="/2022/09/14/ded/typescript-interface/">interface1 <a/></p>
+<h3 id="1-function-interface"><a href="#1-function-interface" class="headerlink" title="1. function interface"></a>1. function interface</h3><p>함수에서 매개변수나 함수형 interface를 사용시 여러 문제 사항이 있는데 그 것을 정리해보려고 한다.<br>간략하게 코드를 만들어보자 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">interface Person&#123;</span><br><span class="line">  (name:string,age?:number):void;  </span><br><span class="line">&#125;</span><br><span class="line">//함수형 interface</span><br><span class="line"></span><br><span class="line">const localData:Person=function(name:string,age:number)&#123;</span><br><span class="line">  console.log(`hello my name is $&#123;name&#125;`);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>위에서의 코드에서 문제는 무엇일까? name:string,age:number라는 곳에서 문제를 찾아볼 수 있다. localData는 결국 Person이라는 interface를 참조하였고 그 방식으로 실행하는 것인데 interface에서 age:number의 방식은 옵셔널 프로퍼티 방식이다. 값이 다르니 결국 실행되지 않으며 위와 같은 방식으로 문제를 접근한다면 좀 더 구조가 잘짜여진 코드를 만들 수 있을까 하는 생각이 든다.</p>
+<h3 id="2-Readonly-Interface"><a href="#2-Readonly-Interface" class="headerlink" title="2. Readonly Interface"></a>2. Readonly Interface</h3><p>Readonly라는 특성은 간단하다. 값은 지정가능하지만 그 값을 변경하지 못하도록 설정하는 것이다. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface Person&#123;</span><br><span class="line">  name:string;</span><br><span class="line">  age?:number;</span><br><span class="line">  Readonly id:number</span><br><span class="line">&#125;</span><br><span class="line">//id 값은 변경불가능</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-intersection"><a href="#3-intersection" class="headerlink" title="3. intersection"></a>3. intersection</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">interface ErrorHandling&#123;</span><br><span class="line">  isSuccess:boolean;</span><br><span class="line">  isError?:&#123;msg:string&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface UserData&#123;</span><br><span class="line">  name:string;</span><br><span class="line">  age?:number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type UserDataCheckResponseType=UserData&amp;ErrorHandling</span><br><span class="line">// type alias</span><br><span class="line"></span><br><span class="line">interface IsUserDataCheckResponse extends UserData,ErrorHandling&#123;&#125;</span><br><span class="line">// 다중 상속</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>intersection 방식은 공부 할 부분이 제법 되는 부분 같다. 다중 상속과 interface의 연계등 좀 더 많은 예시를 보면서 손과 눈에 익혀보도록 해보려고 계획을 해봐야겠다.</p>
+<h3 id="3-Merging-interface"><a href="#3-Merging-interface" class="headerlink" title="3. Merging interface"></a>3. Merging interface</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface UserData&#123;</span><br><span class="line">  name:string;</span><br><span class="line">  age?:number;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface UserData&#123;</span><br><span class="line">   id:number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let data:UserData;</span><br><span class="line">// id,name,age 의 사용이 다되도록 Merging이 자동으로 된다</span><br><span class="line">// type alias 는  Merging 사용이 불가능하다.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/09/14/ded/typescript-interface/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/14/ded/typescript-interface/" class="post-title-link" itemprop="url">typescript interface 1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-09-14 15:38:00 / Modified: 16:25:53" itemprop="dateCreated datePublished" datetime="2022-09-14T15:38:00+09:00">2022-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/typescript/" itemprop="url" rel="index"><span itemprop="name">typescript</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/typescript/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="interface-정리"><a href="#interface-정리" class="headerlink" title="interface 정리"></a>interface 정리</h2><p>기본적인 개요는 문제 없지만 한번 더 정리한다는 생각으로 다시 typescript를 정리해보려고 한다. 먼저 interface 사용방식만 간략하게 정리해보려고 한다.</p>
+<h3 id="1-Optional-property"><a href="#1-Optional-property" class="headerlink" title="1. Optional property"></a>1. Optional property</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">interface User&#123;</span><br><span class="line">id:number;</span><br><span class="line">name:string;</span><br><span class="line">age:number;</span><br><span class="line">gender?:&quot;male&quot;|&quot;female&quot;;</span><br><span class="line">// 1번 Optional property</span><br><span class="line">[index:string]:any;</span><br><span class="line">// 2번 Optional property</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1번 Optional property는 간략하게 값이 있을수도 있고 없을 수도 있다는 뜻이다. 그 값이 필수가 아니라는 것이기에 옵션이라는 의미에 매우 적합하다. 사용예시는 간단하다</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const kim:User=&#123;</span><br><span class="line">id:1, name:&quot;kim gi tae&quot;,age:33</span><br><span class="line">&#125;</span><br><span class="line">//  Optional property noting</span><br><span class="line"></span><br><span class="line">const kim2:User=&#123;</span><br><span class="line">id:1, name:&quot;kim gi tae&quot;,age:33,skills:[&quot;game&quot;,&quot;painting&quot;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>한사람의 데이터를 정의할때 위와 같은 User interface를 지정하고 그 데이터에서 반드시 필요한 id,name,age는 정의하지만 다른 데이터는 정의할 필요가 없다. 그것이 Optional property 이다.</p>
+<p>2번 Optional property는 필요한 값을 자신이 편하게 만들수 있다는 의미의 Optional property라고 할 수 있다.<br>사용예시 같은 경우는 위의 예시와 같이 그 데이터에서 필요한 skills과 같은 값을 지정하고 내부 값은 string으로 지정하겠다라는 옵션적인 선언 방식이다.</p>
+<h3 id="2-fuction-in-interface"><a href="#2-fuction-in-interface" class="headerlink" title="2. fuction in interface"></a>2. fuction in interface</h3><p>interface에서는 간단히 함수도 지정할수 있다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">interface User&#123;</span><br><span class="line">   id:number;</span><br><span class="line">   name:string;</span><br><span class="line">   age:number;</span><br><span class="line">   gender?:&quot;male&quot;|&quot;female&quot;;</span><br><span class="line">   [index:string]:any;</span><br><span class="line">   getData():void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const kim:User=&#123;</span><br><span class="line">   id:1,</span><br><span class="line">   name:&quot;kim gi tae&quot;,</span><br><span class="line">   age:33,</span><br><span class="line">   getData():void&#123;</span><br><span class="line">      console.log(`안녕하세요!$&#123;this.name&#125;입니다`)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>void라는 방식으로 지정한다면 값을 return 하지 않고 실행만하는 방식으로 지정한다는 뜻이다. 위의 예시의 kim 변수와 같이 말이다.<br>재미있는 건 getData()의 내부 값에서 this의 값도 interface로 지정이 가능하다는 것이다.<br>getData(this:User)라고 지정하는 것으로 this는  User의 규칙을 맞춰서 쓰는 것이 가능해진다라는 것이다. </p>
+<h3 id="3-class-implements-interface"><a href="#3-class-implements-interface" class="headerlink" title="3. class implements interface"></a>3. class implements interface</h3><p>아까전 만들어둔 interface를 통해서 class를 만들수도 있다.<br>implements라는 방식을 통해서 만드는 것인데 매우 간단하게 class 생성이 가능해진다.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">interface User&#123;</span><br><span class="line">   id:number;</span><br><span class="line">   name:string;</span><br><span class="line">   age:number;</span><br><span class="line">   gender?:&quot;male&quot;|&quot;female&quot;;</span><br><span class="line">   [index:string]:any;</span><br><span class="line">   getData():void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class UserData implements User&#123;</span><br><span class="line">   id:number;</span><br><span class="line">   name:string;</span><br><span class="line">   age:number;</span><br><span class="line">   gender?:&quot;male&quot;|&quot;female&quot;;</span><br><span class="line">   constructor(name:string)&#123;</span><br><span class="line">      this.name=name</span><br><span class="line">   &#125;</span><br><span class="line">   getData():void&#123;</span><br><span class="line">    console.log(`안녕하세요$&#123;this.name&#125; `)</span><br><span class="line">    &#125;      </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>interface에 담겨진 데이터를 매우 쉽게 재규정할 수 있으며 좀 더 확실한 규칙으로 객체를 만들기 쉽다고 느껴졌다.</p>
+<h2 id="4-interface-extends-interface"><a href="#4-interface-extends-interface" class="headerlink" title="4. interface extends interface"></a>4. interface extends interface</h2><p>interface의 상속도 매우 간단하다. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">interface User&#123;</span><br><span class="line">   id:number;</span><br><span class="line">   name:string;</span><br><span class="line">   age:number;</span><br><span class="line">   gender?:&quot;male&quot;|&quot;female&quot;;</span><br><span class="line">   [index:string]:any;</span><br><span class="line">   getData():void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface gameUser extends User&#123;</span><br><span class="line">   char:string; </span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>전체적인 상속을 통해서 필요한 데이터를 추가하고 개별적으로 사용가능하니 재사용성도 무척 좋다고 생각된다.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -944,202 +1132,6 @@ next를 계속 실행하면 계속 value는 순회하고 그 값이 없으면 do
 <h2 id="이번엔-또다른-에러"><a href="#이번엔-또다른-에러" class="headerlink" title="이번엔 또다른 에러"></a>이번엔 또다른 에러</h2><p><img src="/images/pasted-5.png" alt="upload successful"><br>Cannot read property ‘insert’ of undefined 이건 또 왜 안되는지 모르겠다. 결국 1번 문제의  Currnent speed 가 0이 나온 에러를 중심으로 다시한번 도전…<br>결국 해결하지 못해서 api 작성은 나중으로 조금 미루기로 했다.</p>
 <p>일단 같은 문제에 대해서 스텍오버플로우에 질문이 있어서 답이 있나 찾아봤지만 아직 답변이 없어서 기다려서 문제를 한번 풀어보려고 한다.</p>
 <p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/72004247/npm-install-error-npm-err-cannot-read-property-insert-of-undefined">https://stackoverflow.com/questions/72004247/npm-install-error-npm-err-cannot-read-property-insert-of-undefined</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/19/%EC%8B%A4%EC%A0%9C%20%EA%B0%9C%EB%B0%9C%EC%97%90%EC%84%9C%EC%9D%98%20%EC%84%A4%EA%B3%84%20%EB%8B%A8%EA%B3%84%20%EB%B6%80%EB%B6%84-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/19/%EC%8B%A4%EC%A0%9C%20%EA%B0%9C%EB%B0%9C%EC%97%90%EC%84%9C%EC%9D%98%20%EC%84%A4%EA%B3%84%20%EB%8B%A8%EA%B3%84%20%EB%B6%80%EB%B6%84-1/" class="post-title-link" itemprop="url">실제 개발에서의 설계 단계 부분</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-08-19 18:40:00" itemprop="dateCreated datePublished" datetime="2022-08-19T18:40:00+09:00">2022-08-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-08-21 00:22:07" itemprop="dateModified" datetime="2022-08-21T00:22:07+09:00">2022-08-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/product-management/" itemprop="url" rel="index"><span itemprop="name">product management</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1> 개발 단계의 순서 </h1>
-
-<h3 id="어떤-프로그램을-만들것인가"><a href="#어떤-프로그램을-만들것인가" class="headerlink" title="어떤 프로그램을 만들것인가?"></a>어떤 프로그램을 만들것인가?</h3><p>먼저 요구사항을 분석하고 설계 구현 테스트 라는 단계를 걸처셔 완성적인 사이트 혹은 앱이 개발된다. 그렇다면 요구사항의 분석이 일단 완벽하게 되었다고 가정해보자.</p>
-<h3 id="설계라는-것은-어떤-것을-설계해야-할-것인가"><a href="#설계라는-것은-어떤-것을-설계해야-할-것인가" class="headerlink" title="설계라는 것은 어떤 것을 설계해야 할 것인가"></a>설계라는 것은 어떤 것을 설계해야 할 것인가</h3><p>지금까지 경험해온 부분과 그리고 현재 정리를 해보려고 한다.</p>
-<ol>
-<li><p>어떻게 테스트를 할 것인가?<br>유닛 테스트 그리고 단위 테스트와 Cypress 와 같은 tool로 테스트하는 것은 누구나 생각할 수 있지만  react 와 같은 경우 컴포넌트 단위에서 초기부터 어떤 테스트를 통과해야 할지는 정하는 것이 필요할 것으로 생각한다.<br>예를 들면 input html 이 존재한다면 모든 input은 여러가지 값을 넣어서 submit해도 아무런 error가 나지 않게 설계할 것을 처음부터 명시한다면 좋을 것으로 생각한다. 물론 테스트 중요사항은 요구사항에 따라 매우 크게 달라질수도 있다. 아래부분도 마찬가지이다. </p>
-</li>
-<li><p>어떻게 그리고 어디에 배포를 할것인가?<br>aws를 통해서 배포를 할 것인지 혹은 작은 단위에서 배포를 통하여 vercel과 같은 사이트를 통해서 배포를 한다고 할때도 기본적인 준비사항이 필요하다. 그것을 공부할 필요도 있다. </p>
-</li>
-<li><p>tool은 어떤 것을 사용할 것인가<br>create-react-app 을 그대로 사용할 것인지 혹은 처음부터 하나하나 webpack 설정까지 하나로 할 것인지도 설계 단계에서 생각해낼 부분이다.</p>
-</li>
-<li><p>api와 데이터 파싱의 방식을 정하는 것</p>
-</li>
-</ol>
-<p>db를 사용한다면 어떤 db를 사용할것인지 그리고 api 라면 그 api의 구조를 개발인원끼리 파악하는 것이 중요하다. 이미지 처리는 어떻게 할 것이며, 영상이 있다면 또 어떻게 처리할지도 고민해볼 사항이라고 생각한다.</p>
-<ol start="5">
-<li>요구사항이 중간에 변경되었을때를 대비하는 것</li>
-</ol>
-<p>실제 자주 있는 일이기에 요구사항이 변경될 수도 있다는 것을 대비하며 설계를 준비하는 것도 필요할 것으로 생각한다.</p>
-<p>그 외에도 여러가지 존재하겠지만 지금 생각나는 부분은 이정도이다.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/18/reduce-%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%B3%B4%EC%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/18/reduce-%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%B4%EB%B3%B4%EC%9E%90/" class="post-title-link" itemprop="url">reduce 를 공부해보자</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-08-18 23:34:00" itemprop="dateCreated datePublished" datetime="2022-08-18T23:34:00+09:00">2022-08-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-08-19 15:11:03" itemprop="dateModified" datetime="2022-08-19T15:11:03+09:00">2022-08-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><p>아직 익숙치 않은 javascript 방식중에서 reduce는 아직 제대로 써보지않아서 연습중이다.<br>연습한 내용을 한번 적어보면서 복습을 해보자</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">solution</span>(<span class="params">arr</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> sum = arr.<span class="title function_">reduce</span>(<span class="keyword">function</span> (<span class="params">prev, cur</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> prev + cur;</span><br><span class="line">    &#125;,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">solution</span>([<span class="number">5</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="comment">// 최종 합 20 출력</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>prev는 누산기로서의 역할을 하며 그전값을 대신해주기도 한다.  cur은 현재 값이라서<br>실행 순서는 prev&#x3D;0 + cur&#x3D; 5 &#x3D;&gt; prev&#x3D;5 +cur &#x3D;3 &#x3D;&gt; prev&#x3D;8+cur&#x3D;7 &#x3D;&gt; prev&#x3D;15+cur&#x3D;2&#x3D;&gt; prev&#x3D;17+cur&#x3D;3<br>라는 실행을 한번에 실행하여 결과값을 제시해주는 것이 reduce이다. </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">&quot;경기도&quot;</span>, <span class="string">&quot;수원시&quot;</span>, <span class="string">&quot;팔달구&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> result = arr.<span class="title function_">reduceRight</span>(<span class="function">(<span class="params">acc, element</span>) =&gt;</span> acc + <span class="string">&quot; &quot;</span> + element);</span><br><span class="line"></span><br><span class="line"><span class="comment">/// reduceRight는 배열이나 object 의 오른쪽으로부터 시행되는 함수이다. </span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>이와 같이 reduceRight라는 함수도 존재한다. </p>
-<p>구체적인 예시는 아래 링크로 공부하고 있다.</p>
-<p>[JS-📚-배열-고차함수-reduce]<br><a target="_blank" rel="noopener" href="https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EB%B0%B0%EC%97%B4-%EA%B3%A0%EC%B0%A8%ED%95%A8%EC%88%98-reduce">https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EB%B0%B0%EC%97%B4-%EA%B3%A0%EC%B0%A8%ED%95%A8%EC%88%98-reduce</a></p>
 
       
     </div>
