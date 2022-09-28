@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -157,6 +157,104 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/07/11/Javascript-Null-0-is-true/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/11/Javascript-Null-0-is-true/" class="post-title-link" itemprop="url">Javascript - Null >= 0 is true</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-07-11 22:06:00 / Modified: 22:27:04" itemprop="dateCreated datePublished" datetime="2022-07-11T22:06:00+09:00">2022-07-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Javascript-Null-gt-x3D-0-is-true"><a href="#Javascript-Null-gt-x3D-0-is-true" class="headerlink" title="Javascript - Null &gt;&#x3D; 0 is true"></a>Javascript - Null &gt;&#x3D; 0 is true</h2><p>자바스크립트 기초 공부를 다시 듣던 중 흥미있는 것을 발견했다<br>Null&#x3D;&#x3D;0 false 인데 왜 Null &gt;&#x3D; 0 은 왜 true일까</p>
+<p>스펙 문서에 따르면, &gt;, &lt; 비교 연산자는 Abstract Relational Comparison Algorithm이라는 알고리즘을 사용하여 구문의 true&#x2F;false를 판정한다.<br><a target="_blank" rel="noopener" href="https://interglacial.com/javascript_spec/a-11.html#a-11.8.5">https://interglacial.com/javascript_spec/a-11.html#a-11.8.5</a></p>
+<p>전체적인 내용은 빼고 결과만 살펴보자</p>
+<ol>
+<li>x가 null이고 y가 undefined면, true를 리턴.</li>
+<li>x가 undefined이고 y가 null면, true를 리턴.</li>
+<li>Type(x)가 Number이고 Type(y)가 String이면, x &#x3D;&#x3D; ToNumber(y)의 결과를 리턴.</li>
+<li>Type(x)가 String이고 Type(y)가 Number이면, ToNumber(x) &#x3D;&#x3D; y의 결과를 리턴</li>
+<li>Type(x)가 Boolean이면, ToNumber(x) &#x3D;&#x3D; y의 결과를 리턴.</li>
+<li>Type(y)가 Boolean이면, x &#x3D;&#x3D; ToNumber(y)의 결과를 리턴.</li>
+<li>Type(x)가 String 또는 Number이고, Type(y)가 Object이면, x &#x3D;&#x3D; ToPrimitive(y)의 결과를 리턴.</li>
+<li>Type(x)가 Object이고, Type(y)가 String 또는 Number이면, ToPrimitive(x)&#x3D;&#x3D; y의 결과를 리턴.</li>
+<li>false를 리턴.<br>ToPrimitive은 형변환 함수이다<br><a target="_blank" rel="noopener" href="https://ko.javascript.info/object-toprimitive">https://ko.javascript.info/object-toprimitive</a></li>
+</ol>
+<p>ToPrimitive를 사용하면 숫자형이나 문자형으로의 형 변환을 원하는 대로 조절할 수 있습니다.</p>
+<p>null과 0은 다른 타입이므로 2~8번을 살펴보면 모두 해당하지 않고, 9번 false이다<br>따라서 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="number">0</span>; <span class="comment">// false</span></span><br><span class="line"><span class="literal">null</span> !==<span class="number">0</span> ; <span class="comment">//true</span></span><br><span class="line"><span class="literal">null</span> &gt;= <span class="number">0</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>수학적으로, 두 수 x(null)와 y(0)가 있을 때, x(null)가 y(0) 보다 작지 않다 면, x(null)는 y(0) 보다 반드시 크거나 같다 . 그렇기에</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> &gt;= <span class="number">0</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>라고 할 수 있다.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
