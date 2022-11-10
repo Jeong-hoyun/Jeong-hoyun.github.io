@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -157,6 +157,211 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/23/%ED%9A%8C%EC%9E%A5-%EC%84%A0%EA%B1%B0-coding-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/23/%ED%9A%8C%EC%9E%A5-%EC%84%A0%EA%B1%B0-coding-test/" class="post-title-link" itemprop="url">회장 선거(coding test)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-23 19:56:00 / Modified: 20:02:27" itemprop="dateCreated datePublished" datetime="2022-08-23T19:56:00+09:00">2022-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/javascript/codingtest/" itemprop="url" rel="index"><span itemprop="name">codingtest</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>문제 난이도가 어지러워서 1시간 동안 계속 돌리다가 겨우겨우 풀었다. 몇가지 테스트를 통해서<br>문제가 정답이 나오는 것을 확인 검수도 받았다.</p>
+<h3 id="문제-회장선거"><a href="#문제-회장선거" class="headerlink" title="문제 회장선거"></a>문제 회장선거</h3><blockquote>
+<p>현수네 반은 오늘 회장선거를 합니다. 현수네 반 N명의 학생은 각자 자기가 좋아하는 학생을<br>회장후보로 추천합니다. 한 학생이 여러명을 추천할 수 있습니다.<br>추천횟수가 k번 이상인 학생들만 회장선거에 출마할 수 있습니다. 회장선거에 출마한 학생들<br>은 자기를 추천해준 학생들에게 감사의 이메일을 보내기로 했습니다.<br>매개변수 votes에 추천정보가 주어지면 0번 학생부터 N-1번 학생까지 각 학생이 감사이메일<br>을 받는 횟수를 알아내는 프로그램을 작성하세요</p>
+</blockquote>
+<h2 id="정답"><a href="#정답" class="headerlink" title="정답"></a>정답</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">solution</span>(<span class="params">n,votes, k</span>) &#123;</span><br><span class="line"><span class="keyword">let</span> result=<span class="title class_">Array</span>(n).<span class="title function_">fill</span>(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">let</span> elected=[]</span><br><span class="line"><span class="keyword">let</span> sH=<span class="keyword">new</span> <span class="title class_">Map</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> x <span class="keyword">of</span> votes)&#123;   </span><br><span class="line">    sH.<span class="title function_">set</span>(x[<span class="number">1</span>],(sH.<span class="title function_">get</span>(x[<span class="number">1</span>])||<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> resultArr=<span class="title class_">Array</span>.<span class="title function_">from</span>(sH)</span><br><span class="line">resultArr.<span class="title function_">map</span>(<span class="function">(<span class="params">e,i</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(e[<span class="number">1</span>]&gt;=k)&#123;</span><br><span class="line">            elected.<span class="title function_">push</span>(e[<span class="number">0</span>])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;)</span><br><span class="line">  votes.<span class="title function_">map</span>(<span class="function"><span class="params">e</span>=&gt;</span>&#123;</span><br><span class="line">       elected.<span class="title function_">map</span>(<span class="function"><span class="params">item</span>=&gt;</span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(item===e[<span class="number">1</span>])&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(e[<span class="number">0</span>]===i)&#123;</span><br><span class="line">                result[i]+=<span class="number">1</span></span><br><span class="line">            &#125;</span><br><span class="line">            &#125;          </span><br><span class="line">          &#125;</span><br><span class="line">    </span><br><span class="line">       &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">   </span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">       </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>살짝 순서대로 설명을 하자면 먼저 </p>
+<ol>
+<li>맵핑을 한뒤 회장 선거에 나오는 사람을 검색한다. sH.set(x[1],(sH.get(x[1])||0)+1);</li>
+<li>결과를 맵으로 변경한뒤에 투표수가 k이상 인 사람을 체크<br>if(e[1]&gt;&#x3D;k){    elected.push(e[0])     }</li>
+<li>전체 결과를 map으로 돌린뒤에 투표한 사람과 당선된 사람을 비교하여 초기에 만들어둔<br>배열에 존재할 때마다 하나씩 추가해준다.  if(e[0]&#x3D;&#x3D;&#x3D;i){      result[i]+&#x3D;1      }</li>
+</ol>
+<p>한시간 이상은 걸린 것 같다. 일단 문제 푸는 것에 주력하고 나중에는 시간도 단축할 수 있도록 노력해보자 </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/22/api-%EC%84%9C%EB%B2%84-%EB%A7%8C%EB%93%A4%EA%B8%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jeong-hoyun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="frontend 개발중">
+      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | frontend 개발중">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/22/api-%EC%84%9C%EB%B2%84-%EB%A7%8C%EB%93%A4%EA%B8%B0/" class="post-title-link" itemprop="url">api 서버 만들기 1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-22 14:37:00 / Modified: 14:59:28" itemprop="dateCreated datePublished" datetime="2022-08-22T14:37:00+09:00">2022-08-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/backend/" itemprop="url" rel="index"><span itemprop="name">backend</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/backend/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="주말동안-밤새면서-만들던-작업-정리"><a href="#주말동안-밤새면서-만들던-작업-정리" class="headerlink" title="주말동안 밤새면서 만들던 작업 정리"></a>주말동안 밤새면서 만들던 작업 정리</h2><ol>
+<li>mysql 과 phpmyadmin 설치를 통해 나만의 DB 만들기</li>
+</ol>
+<p>ec2에 이것저것 설치하면서 과거 배웠던 php나 db커넥트 방식을 다시 써보게 되서 감회가 새롭다.<br>자세한 설치 방식은 apt-get 형식으로 php-fpm 을 설치하였고 php-cil 그리고 phpmyadmin 설치</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br><span class="line">$ sudo apt install phpmyadmin</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>phpmyadmin<br>DB작성은 예전 많이 해서 문제는 없었는데  mysql 업데이트로 파티션 나누는 방식이 생겨 언제 한번 공부를 생각중이다. 지금은 할게 많아서…</li>
+</ol>
+<p><img src="/images/pasted-9.png" alt="upload successful"><br>primary key 설정과 auto increment 설정은 따로 지정하였다. 한국어로 쓸 예정이라 데이터 정렬은<br>utf8mb3 일반으로 설정하였다. </p>
+<ol start="3">
+<li>php 형식으로 GET,POST 받아보기 테스트<br>nginx를 사용하여 예전 사용했던 아파치 서버의 .htaccess 를 사용하지 못해 아직도 GET 방식만 성공할수 있었다. 다른 방식이 있나 언제 시간나면 다른 분들께 물어볼 예정</li>
+</ol>
+<p>GET 방식은 아래와 같은 방식으로 받아보았다.</p>
+<p><img src="/images/pasted-8.png" alt="upload successful"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Origin: *&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Headers: *&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&quot;Access-Control-Allow-Methods: *&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>Access-Control-Allow-Origin을 통해 CORS 문제를 방지하였고 sql문을 통해서 전체적인 내용이 나오도록 처리하였다. 혹시 id를 개별로 GET방식으로 쿼리를 날렸을때는 따로 볼수있도록 처리해보았다.<br>laravel 이 되었다면 이런 하나하나 짤 필요도 없을것은 엄청 고생해서 설정하게 되었다.</p>
+<ol start="4">
+<li>remote ssh 사용을 통해 좀더 원할하게 서버 접근가능하게 하기</li>
+</ol>
+<p><img src="/images/pasted-7.png" alt="upload successful"></p>
+<p>vscode 확장기능을 통해서 설치하였고 설정방식은 윈도우라면 ctrl+shift+p를 하고 remote ssh의 내용을 체크한뒤 비밀키 장소를 설정하고 도메인주소를 입력하면 성공적으로 동작할 것이다.</p>
+<ol start="5">
+<li>생각보다 너무 오래 걸려서 좀 더 쉽게 api 서버를 만들 방법을 찾는중</li>
+</ol>
+<p>생각보다 aws 람다식과 게이트웨이 방식으로 쉽게 만들수 있다는 이야기가 있어서 현재 공부중인데 이것보다 엄청 간단한것같다. 다 만들어진다면 한번 블로그에 정리할 예정이다.</p>
+<h2 id="그-외-여러가지-문제-생긴-것-공유"><a href="#그-외-여러가지-문제-생긴-것-공유" class="headerlink" title="그 외 여러가지 문제 생긴 것 공유"></a>그 외 여러가지 문제 생긴 것 공유</h2><ol>
+<li>npm은 여전히 동작하지 않는다.<br>아직도 이유를 모르겠다</li>
+<li>curl 도 동작하지 않는다<br>이것도 이유를 모르겠다. apt-get이 된다는건 보안상 문제는 아닌 것으로 생각되는데..</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -916,205 +1121,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/09/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/09/Next-%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80-1/" class="post-title-link" itemprop="url">Next 개발일지 1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-08-09 17:15:00 / Modified: 17:49:55" itemprop="dateCreated datePublished" datetime="2022-08-09T17:15:00+09:00">2022-08-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/react/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>현재 next.js로 앱 두개를 개발중이며 하나씩 오류를 수정중이며 어떤 오류가 있었는지 그리고 어느 부분에서 고생하였는지 한번씩 기록을 남기려고 한다.</p>
-<h3 id="notion-api-연동-포트폴리오-사이트"><a href="#notion-api-연동-포트폴리오-사이트" class="headerlink" title="notion api 연동 포트폴리오 사이트"></a>notion api 연동 포트폴리오 사이트</h3><p><a target="_blank" rel="noopener" href="https://github.com/Jeong-hoyun/portfolio-site">https://github.com/Jeong-hoyun/portfolio-site</a></p>
-<h4 id="배운점"><a href="#배운점" class="headerlink" title="배운점"></a>배운점</h4><ol>
-<li>next js의 Image url 파싱할떄 초기 설정이 필요하다는 부분을 배웠다.<br>next.config 설정시에 url 의 내용을 파악하고 jpg인지 png인지 혹은 null 일때 처리는 어떻게 해야하는지에 대해서도 한번<br>깊게 생각하는 계기가 되었다.</li>
-<li>getServerSideProps와 getStaticProps 를 실제적으로 경험하여 SSR과 CSR 의 차이를 어느정도 알게 되었다.<br>getStaticProps는 최초 빌드 시에 딱 한 번만 호출된다는 점이 매우 중요한 차이를 만든다는 것을 알수 있게 되었다. 예를 들어 notion api 사용을 한다고 getStaticProps를 사용한다면 notion을 수정한다해도 getStaticProps를 쓴 페이지는 변함이 없다. 반대로 getServerSideProps는 실시간으로 렌더시에 데이터가 수정될 경우에 사전렌더링이 되기 때문에 promise 를 통한 비동기 방식으로 데이터를 받아온다면 실시간 변동도 바로 확인이 가능하다. 왠만하면 수정이 거의 없는 상품 설명서, 또는 제품 목록 등은 SEO를 생각하면 getServerSideProps가 좋지 않을까 생각해본다.<br>밑에와 같이 ({ params })과 같은 객체를 넘겨 API주소를 변동시켜서 데이터를 바꿀수도 있기에 다른 방식으로도 써볼 생각이다.</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// getStaticProps 페이지 안에서만 쓸수 있다. </span><br><span class="line">export async function getStaticProps(&#123; params &#125;) &#123;   </span><br><span class="line">    // API 호출</span><br><span class="line">    const response = await fetch(`https/example.com/posts/$&#123;params.id&#125;`); // </span><br><span class="line">    const post = await response.json();</span><br><span class="line"></span><br><span class="line">    return &#123;</span><br><span class="line">        props: &#123; post &#125;,  //  컴포넌트가 전달받을 props 객체</span><br><span class="line">        revalidate: false,  // 페이지의 Regeneration을 수행하기 위한 유예 기간</span><br><span class="line">        notFound: false  // 404 페이지 반환 여부 (fallback: false일 때는 불필요)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="에러-사항"><a href="#에러-사항" class="headerlink" title="에러 사항"></a>에러 사항</h4><ol>
-<li>cannot find module ‘fs’ <br/><br>모듈 문제를 한번더 import 한 결과 이와 같은 결과가 나올수 있다는 것을 알았다.</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jeong-hoyun.github.io/2022/08/01/Next-js-start/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jeong-hoyun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="frontend 개발중">
-      <meta itemprop="description" content="과거 마케딩 경험도 가끔씩 올릴 예정입니다">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | frontend 개발중">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/01/Next-js-start/" class="post-title-link" itemprop="url">Next.js start</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2022-08-01 22:47:00 / Modified: 23:11:44" itemprop="dateCreated datePublished" datetime="2022-08-01T22:47:00+09:00">2022-08-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/react/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Next-js란"><a href="#Next-js란" class="headerlink" title="Next.js란"></a>Next.js란</h2><p>nextjs는 React로 만드는 서버사이드 렌더링 프레임 워크다. 서버사이드렌더링이란 브라우저 혹은 클라이언트에서 실행하지 않고 서버측에서 데이터를 실행하여 모든 js 파일을 로드하고 그 데이터를 웹상에서 먼저 확인 뒤에 사용자는 웹을 보게된다 </p>
-<p>기존의 react의 구동원리는 클라이언트 사이드렌더링 방식이며 이 경우에는 자바스크립트가 dom을 생성하기 전에는 아무것도 파악되지 않아서 문제를 만들게 되는데 그 문제의 대표적인 문제가 SEO의 부재처리가 될 것이다.</p>
-<p>SEO(검색 엔진 최적화)라는 것은 구글의 검색엔진만의 문제가 아닌 대부분의 검색엔진에서 서버사이드렌더링 방식의 데이터만 파싱되기 때문에 검색에 걸리지 않고 그것은 바로 매출에 큰 악영향을 주게 됩니다. 프론트엔드만의 문제가 아닌 회사 전체의 사활이 걸린 문제라고 할 수 있다.</p>
-<h2 id="Next-js의-이점"><a href="#Next-js의-이점" class="headerlink" title="Next.js의 이점"></a>Next.js의 이점</h2><p>그러한 SEO문제를 NEXT.JS에서는 두가지 방식을 한번에 쓰는 것으로 해결하였습니다.<br>데이터를 인식하게 할 부분( meta ,description ,keyword etc)은 서버에서 자바스크립트를 로딩하게 하며 ( Server Side Rendering) 비동기적인 부분이나 api를 통해서 새로운 페이지를 불러오는 경우에는 클라이언트 사이드 렌더링(Client Side Rendering)을 통해 빠른 속도로 데이터를 처리하는 것이 nextjs의 큰 이점이라고 생각한다.</p>
-<p>또한 프레임워크로서 새로운 기능도 여러 모듈로서 추가되었는데 몇가지만 정리해보려고 한다.</p>
-<ol>
-<li>Document기능</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import Document, &#123; Html, Head, Main, NextScript &#125; from &quot;next/document&quot;;</span><br><span class="line">export default class CustomDocument extends Document &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;Html&gt;</span><br><span class="line">        &lt;Head&gt;</span><br><span class="line">         </span><br><span class="line">        &lt;/Head&gt;</span><br><span class="line">        &lt;body&gt;</span><br><span class="line">          &lt;Main /&gt;</span><br><span class="line">        &lt;/body&gt;</span><br><span class="line">        &lt;NextScript /&gt;</span><br><span class="line">      &lt;/Html&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
-<p>html에서 자주 쓰는  Html, Head와 같은 방식으로 서버사이드 방식으로 할 부분을 지정하는 기능이다<br>모든페이지에 아래 메타테크가 head에 웹 타이틀,ga,meta기능을 추가하여 SEO적인 부분을 크게 보완하였다.</p>
-<ol start="2">
-<li>Link 기능</li>
-</ol>
-<p>보통 페이지간 이동은 a 태그를 사용하나 next에서는 사용하지 못한다.</p>
-<p>a 태그를 사용하면 처음 페이지에 진입시 번들 파일을 받고, a 태그에 의해 라우팅 되면 다시 번들 파일을 받는 것이 문제가 되기에 또한 redux의 경우 store의 state 값이 증발되는 현상도 일어난다. 그렇기 때문에 a 태그는 전혀 다른 사이트로 페이지를 이동시켜 다시 돌아오지 않는 경우만 사용하고, 그 이외에는 모두 Link 태그를 사용합니다.</p>
-<ol start="3">
-<li>getStaticProps</li>
-</ol>
-<p>페이지에서 (정적 사이트 생성) 이라는 함수 를 내보내는 경우 Next.js는 빌드 시getStaticProps를 통해서 반환된 props를 사용하여 페이지를 미리 렌더링하기 위한 기능이다.<br>보통 api나 데이터 파싱을 하고 그 데이터를 서버에 남겨 데이터를 SEO에 기여하고 싶을 경우에 사용한다.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">// 공식문제 예시 </span><br><span class="line">function Blog(&#123; posts &#125;) &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &#123;posts.map((post) =&gt; (</span><br><span class="line">        &lt;li&gt;&#123;post.title&#125;&lt;/li&gt;</span><br><span class="line">      ))&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export async function getStaticProps() &#123;</span><br><span class="line"></span><br><span class="line">  const res = await fetch(&#x27;https://.../posts&#x27;)</span><br><span class="line">  const posts = await res.json()</span><br><span class="line"></span><br><span class="line">  // By returning &#123; props: &#123; posts &#125; &#125;, the Blog component</span><br><span class="line">  // will receive `posts` as a prop at build time</span><br><span class="line">  return &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">      posts,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Blog</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function Blog(&#123; posts &#125;) &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &#123;posts.map((post) =&gt; (</span><br><span class="line">        &lt;li&gt;&#123;post.title&#125;&lt;/li&gt;</span><br><span class="line">      ))&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export async function getStaticProps() &#123;</span><br><span class="line"></span><br><span class="line">  const res = await fetch(&#x27;https://.../posts&#x27;)</span><br><span class="line">  const posts = await res.json()</span><br><span class="line"></span><br><span class="line">  // By returning &#123; props: &#123; posts &#125; &#125;, the Blog component</span><br><span class="line">  // will receive `posts` as a prop at build time</span><br><span class="line">  return &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">      posts,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Blog</span><br></pre></td></tr></table></figure>
-<p>그외에도 더 많은 툴이 존재하지만 다음 기사에 정리해볼 생각이다. </p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 </div>
